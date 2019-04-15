@@ -1,23 +1,29 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
 
 Vue.use(Router)
+
+//import page
+const error_404 = () => import('@/page/error_404.vue')
+const home = ()=> import('@/page/home.vue')
+const test = ()=> import('@/page/test.vue')
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home
+      path: '/home',
+      name: 'Home',
+      component: home
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path:'*',
+      name:'Error_404',
+      component: error_404
+    },
+    {
+      path:'/test',
+      name:'Test',
+      component: test
     }
   ]
 })
