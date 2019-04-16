@@ -7,6 +7,9 @@ Vue.use(Router)
 const error_404 = () => import('@/page/error_404.vue')
 const home = ()=> import('@/page/home.vue')
 const test = ()=> import('@/page/test.vue')
+//special
+const refresh = ()=> import('@/page/special/refresh.vue')
+
 
 export default new Router({
   routes: [
@@ -24,6 +27,11 @@ export default new Router({
       path:'/test',
       name:'Test',
       component: test
+    },
+    {
+      path:'/refresh',
+      name:'refresh',
+      component: refresh
     }
   ]
 })

@@ -3,7 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 //接口配置
-import http from '@/request/http'
+import api from '@/request/api/index'
+Vue.prototype.$api = api
 //vant
 import Vant from 'vant'
 import 'vant/lib/index.css'

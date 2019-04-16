@@ -1,61 +1,114 @@
-//封装axios
-import axios from 'axios'
-import QS from 'qs'//// 引入qs模块，用来序列化post类型的数据
-//vant toast提示组件
-import { Toast } from 'vant'
-import interceptors from '@/request/interceptors'
-
-// 环境的切换
-if (process.env.NODE_ENV === 'development') {
-  axios.defaults.baseURL = ''
-}
-else if (process.env.NODE_ENV === 'debug') {
-  axios.defaults.baseURL = ''
-}
-else if (process.env.NODE_ENV === 'production') {
-  axios.defaults.baseURL = ''
-}
-//设置请求超时
-axios.defaults.timeout = 10000 //10s
-
-//post请求头设置
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
-
-//封装get方法和post方法
 /**
- * get方法，对应get请求
- * @param {String} url [请求的url地址]
- * @param {Object} params [请求时携带的参数]
+ * axios封装
+ * 请求拦截、响应拦截、错误统一处理
  */
-export function get(url, params) {
-  return new Promise((resolve, reject) => {
-    axios.get(url, {
-      params: params
-    }).then(res => {
-      resolve(res.data);
-    }).catch(err => {
-      reject(err.data)
-    })
+import axios from 'axios';
+import router from '../router';
+import store from '@/store';
+import { Toast } from 'vant';
+
+/**
+ * 提示函数
+ * 禁止点击蒙层、显示一秒后关闭
+ */
+const tip = msg => {
+  Toast({
+    message: msg,
+    duration: 2000,
+    forbidClick: true
   });
 }
+
 /**
- * post方法，对应post请求
- * @param {String} url [请求的url地址]
- * @param {Object} params [请求时携带的参数]
+ * 跳转登录页
+ * 携带当前页面路由，以期在登录页面完成登录后返回当前页面
  */
-export function post(url, params) {
-  return new Promise((resolve, reject) => {
-    axios.post(url, QS.stringify(params))
-      .then(res => {
-        resolve(res.data);
-      })
-      .catch(err =>{
-        reject(err.data)
-      })
+const toLogin = () => {
+  router.replace({
+    path: '/login',
+    query: {
+      redirect: router.currentRoute.fullPath
+    }
   });
 }
-/*这里有个小细节说下，axios.get()方法和axios.post()在提交数据时参数的书写方式还是有区别的。
-区别就是，get的第二个参数是一个{}，然后这个对象的params属性值是一个参数对象的。
-而post的第二个参数就是一个参数对象。两者略微的区别要留意哦！*/
 
+/**
+ * 请求失败后的错误统一处理
+ * @param {Number} status 请求失败的状态码
+ */
+const errorHandle = (status, other) => {
+  // 状态码判断
+  switch (status) {
+    // 401: 未登录状态，跳转登录页
+    case 401:
+      toLogin();
+      break;
+    // 403 token过期
+    // 清除token并跳转登录页
+    case 403:
+      tip('登录过期，请重新登录');
+      localStorage.removeItem('token');
+      store.commit('loginSuccess', null);
+      setTimeout(() => {
+        toLogin();
+      }, 1000);
+      break;
+    // 404请求不存在
+    case 404:
+      tip('请求的资源不存在');
+      break;
+    /*case 500:
+      store.commit('changeNetworkSuccess', false);
+      tip('网络异常!');
+      router.push({path:'refresh'})*/
+    default:
+      console.log('其它错误',other);
+  }}
 
+// 创建axios实例
+const instance = axios.create({
+  timeout: 10000,
+});
+// 设置post请求头
+instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+/**
+ * 请求拦截器
+ * 每次请求前，如果存在token则在请求头中携带token
+ */
+instance.interceptors.request.use(
+  config => {
+    // 登录流程控制中，根据本地是否存在token判断用户的登录情况
+    // 但是即使token存在，也有可能token是过期的，所以在每次的请求头中携带token
+    // 后台根据携带的token判断用户的登录情况，并返回给我们对应的状态码
+    // 而后我们可以在响应拦截器中，根据状态码进行一些统一的操作。
+    const token = store.state.token;
+    token && (config.headers.Authorization = token);
+    return config;
+  },
+  error => Promise.error(error))
+
+// 响应拦截器
+instance.interceptors.response.use(
+  // 请求成功
+  res => res.status === 200 ? Promise.resolve(res)&store.commit('changeNetworkSuccess', true) : Promise.reject(res),
+  // 请求失败
+
+  error => {
+    const { response } = error;
+    console.log(94,response)
+    if (response) {
+      // 请求已发出，但是不在2xx的范围
+      errorHandle(response.status, response.data.message);
+      return Promise.reject(response);
+    } else {
+      // 处理断网的情况
+      // eg:请求超时或断网时，更新state的network状态
+      // network状态在app.vue中控制着一个全局的断网提示组件的显示隐藏
+      // 关于断网组件中的刷新重新获取数据，会在断网组件中说明
+      store.commit('changeNetworkSuccess', false);
+      tip('网络异常!');
+      router.push({path:'refresh'})
+    }
+  });
+
+export default instance;

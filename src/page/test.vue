@@ -15,12 +15,13 @@
             <p>{{fullName}}</p>
             <p>{{count}}</p>
         </div>
-
+        <button @click="changeStore()">testBtn</button>
+        <button @click="goRefresh()">goRefresh</button>
     </div>
 </template>
 <script>
   import testComponents from '@c/testComponents.vue'
-  import {getStore} from "@/request/api";
+  import {mapState,mapMutations,mapGetters } from 'vuex';
   //mixins 定义个对象（优先级全局mixins>局部mixins>局部mixins，全局定义mixins不要+s）
   const countConsole ={
     created(){
@@ -33,13 +34,19 @@
         //console.log('我是mixins');
       },
       apiTest(){
-        getStore({
-          q:'store',
-          code:'utf-8'
-        }).then((res)=>{
-          console.log(39,res);
+        //console.log(35,this.$api)
+        this.$api.store.getStoreList({code:'utf-8',q:'手机'}).then(res=>{
+          //console.log(36,res)
         })
-      }
+      },
+      changeStore(){
+        //this.$store.commit('changeNetworkSuccess',false)
+        this.changeNetworkSuccess(false)
+      },
+      goRefresh(){
+        this.$router.push({path:'refresh'})
+      },
+      ...mapMutations(['changeNetworkSuccess'])
     }
   }
   export default {
@@ -57,7 +64,8 @@
         this.$router.push({
           path: '/home'
         })
-      }
+      },
+
     },
     mounted(){
       //this.change()
@@ -66,7 +74,8 @@
     computed:{
       fullName(){
         return this.firstName+ ' '+this.lastName
-      }
+      },
+      ...mapState(['network'])
     },
     watch:{
       fullName(newVal,oldVal){
