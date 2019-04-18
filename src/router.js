@@ -4,7 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 //import page
-const error_404 = () => import('@/page/error_404.vue')
+const error_404 = () => import('@/page/special/error_404.vue')
 const home = ()=> import('@/page/home.vue')
 const test = ()=> import('@/page/test.vue')
 //special

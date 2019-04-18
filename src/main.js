@@ -2,14 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-//接口配置
-import api from '@/request/api/index'
-Vue.prototype.$api = api
-//vant
-import Vant from 'vant'
-import 'vant/lib/index.css'
 
-Vue.use(Vant)
+import prototype from '@/assets/js/prototype'
+Vue.use(prototype)
+import plugins from '@/assets/js/plugins'
+
 
 Vue.config.productionTip = false
 
@@ -19,8 +16,3 @@ new Vue({
   render: h => h(App)
 }).$mount('#app')
 
-/*Vue.directive('qfocus',{
-  inserted(el){
-    el.focus()
-  }
-});*/

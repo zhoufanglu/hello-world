@@ -20,9 +20,6 @@
       ...mapState(['networkSuccess'])
     },
     components: {},
-    mounted() {
-
-    }
   }
 </script>
 <style>
