@@ -1,7 +1,9 @@
 <template>
     <div>
         <div>home</div>
-        <div @click="returnPrevPage()">返回</div>
+        <router-link to="/test">
+            <h3>test</h3>
+        </router-link>
     </div>
 </template>
 <script>
@@ -13,9 +15,7 @@
       }
     },
     methods:{
-      returnPrevPage(){
-        this.$router.go(-1)
-      }
+
     },
     mounted(){
       [3, 15, 8, 29, 102, 22].sort((a,b) => {

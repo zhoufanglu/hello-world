@@ -1,5 +1,6 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
     <div class="test">
+        <header-content></header-content>
         <div>test</div>
         <router-link to="/home">goHome</router-link>
         <testComponents>
@@ -16,12 +17,13 @@
             <p>{{count}}</p>
         </div>
         <button @click="changeStore()">testBtn</button>
-        <button @click="goRefresh()">goRefresh</button>
+        <button @click="goRefresh()">goRefresh【断网了就会自动去这个页面】</button>
     </div>
 </template>
 <script>
   import testComponents from '@c/testComponents.vue'
-  import {mapState,mapMutations,mapGetters } from 'vuex';
+  import {mapState,mapMutations,mapGetters } from 'vuex'
+  import headerContent from '@c/header.vue'
   //mixins 定义个对象（优先级全局mixins>局部mixins>局部mixins，全局定义mixins不要+s）
   const countConsole ={
     created(){
@@ -40,13 +42,13 @@
         })
       },
       changeStore(){
-        //this.$store.commit('changeNetworkSuccess',false)
-        this.changeNetworkSuccess(false)
+        //this.$store.commit('changeNetwork',false)
+        this.changeNetwork(false)
       },
       goRefresh(){
         this.$router.push({path:'refresh'})
       },
-      ...mapMutations(['changeNetworkSuccess'])
+      ...mapMutations(['changeNetwork'])
     }
   }
   export default {
@@ -83,7 +85,8 @@
       }
     },
     components:{
-      testComponents
+      testComponents,
+      headerContent
     }
   }
 </script>

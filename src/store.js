@@ -5,13 +5,19 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    token:'noLogin',
+    token:false,
     loginSuccess:false,
-    networkSuccess: true //是否断网
+    networkSuccess: true, //是否断网
   },
   mutations: {
-    changeNetworkSuccess(state,val){
+    changeNetwork(state,val){
       state.networkSuccess = val
+    },
+    changeLogin(state,val){
+      state.loginSuccess = val
+    },
+    changeToken(state,val){
+      state.token = val
     }
   },
   actions: {

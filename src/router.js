@@ -4,9 +4,11 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 //import page
-const error_404 = () => import('@/page/special/error_404.vue')
+const error_404 = () => import('@/page/errorPage/error_404.vue')
+const error_401 = () => import('@/page/errorPage/error_401.vue')
 const home = ()=> import('@/page/home.vue')
-const test = ()=> import('@/page/test.vue')
+const test = ()=> import('@/page/test/test.vue')
+const login = ()=>import('@/page/login/login.vue')
 //special
 const refresh = ()=> import('@/page/special/refresh.vue')
 
@@ -16,6 +18,9 @@ export default new Router({
     {
       path: '/home',
       name: 'Home',
+      meta:{
+        requiresAuth:true,
+      },
       component: home
     },
     {
@@ -24,14 +29,27 @@ export default new Router({
       component: error_404
     },
     {
+      path:'/401',
+      name:'Error_401',
+      component: error_401
+    },
+    {
       path:'/test',
       name:'Test',
+      meta:{
+        requiresAuth:true,
+      },
       component: test
     },
     {
       path:'/refresh',
       name:'refresh',
       component: refresh
+    },
+    {
+      path:'/login',
+      name:'login',
+      component: login
     }
   ]
 })
