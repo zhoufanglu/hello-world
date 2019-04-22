@@ -15,6 +15,11 @@
     },
     methods: {
       login(){
+        let param ={}
+        this.$api.post(
+          '111',
+          param,
+        )
         this.changeLogin(true)
         this.changeToken(true)
         let path = this.redirect?this.redirect:'/home'

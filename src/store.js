@@ -8,6 +8,7 @@ export default new Vuex.Store({
     token:false,
     loginSuccess:false,
     networkSuccess: true, //是否断网
+    countTest: 0, //测试计数
   },
   mutations: {
     changeNetwork(state,val){
@@ -18,9 +19,16 @@ export default new Vuex.Store({
     },
     changeToken(state,val){
       state.token = val
+    },
+    INCREMENT(state){
+        state.countTest++
     }
   },
   actions: {
-
+    increment( {commit} ){
+        setTimeout(()=>{
+          commit('INCREMENT')
+        },1000)
+    },
   }
 })

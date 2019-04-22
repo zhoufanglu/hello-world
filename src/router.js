@@ -36,6 +36,7 @@ export default new Router({
     {
       path:'/test',
       name:'Test',
+      hidden:true,
       meta:{
         requiresAuth:true,
       },

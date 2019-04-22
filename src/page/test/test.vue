@@ -18,11 +18,17 @@
         </div>
         <button @click="changeStore()">testBtn</button>
         <button @click="goRefresh()">goRefresh【断网了就会自动去这个页面】</button>
+        <hr>
+        <div>
+            <h4>action</h4>
+            <div>{{countTest}}</div>
+            <button @click="add">add</button>
+        </div>
     </div>
 </template>
 <script>
   import testComponents from '@c/testComponents.vue'
-  import {mapState,mapMutations,mapGetters } from 'vuex'
+  import {mapState,mapMutations,mapActions } from 'vuex'
   import headerContent from '@c/header.vue'
   //mixins 定义个对象（优先级全局mixins>局部mixins>局部mixins，全局定义mixins不要+s）
   const countConsole ={
@@ -48,7 +54,7 @@
       goRefresh(){
         this.$router.push({path:'refresh'})
       },
-      ...mapMutations(['changeNetwork'])
+      ...mapMutations(['changeNetwork','increment'])
     }
   }
   export default {
@@ -58,7 +64,7 @@
       return{
         firstName:'',
         lastName:'',
-        count:0
+        count:0 ,
       }
     },
     methods: {
@@ -67,9 +73,18 @@
           path: '/home'
         })
       },
-
+      add(){
+        this.increment()
+      },
+      ...mapMutations(['increment']),
+      ...mapActions(['increment','changeTest'])
     },
     mounted(){
+      let name = 'lfz'
+      load({name:'666',age:'17'})
+      function load({name}){
+
+      }
       //this.change()
       //console.log(47,this.mixins);
     },
@@ -77,7 +92,7 @@
       fullName(){
         return this.firstName+ ' '+this.lastName
       },
-      ...mapState(['network'])
+      ...mapState(['network','countTest'])
     },
     watch:{
       fullName(newVal,oldVal){
