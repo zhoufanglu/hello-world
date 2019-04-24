@@ -16,7 +16,7 @@
             <p>{{fullName}}</p>
             <p>{{count}}</p>
         </div>
-        <button @click="changeStore()">testBtn</button>
+        <button @click="changeStore()">点击后假装断网</button>
         <button @click="goRefresh()">goRefresh【断网了就会自动去这个页面】</button>
         <hr>
         <div>
@@ -24,6 +24,9 @@
             <div>{{countTest}}</div>
             <button @click="add">add</button>
         </div>
+            <el-button>默认按钮</el-button>
+            <el-radio v-model="radio" label="1">备选项</el-radio>
+            <el-radio v-model="radio" label="2">备选项</el-radio>
     </div>
 </template>
 <script>
@@ -62,6 +65,7 @@
     mixins:[countConsole],
     data(){
       return{
+        radio:'',
         firstName:'',
         lastName:'',
         count:0 ,

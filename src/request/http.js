@@ -5,18 +5,18 @@
 import axios from 'axios';
 import router from '../router';
 import store from '@/store';
-import { Toast } from 'vant';
+//import { Toast } from 'vant';
 
 /**
  * 提示函数
  * 禁止点击蒙层、显示一秒后关闭
  */
 const tip = msg => {
-  Toast({
+  /*Toast({
     message: msg,
     duration: 2000,
     forbidClick: true
-  });
+  });*/
 }
 
 /**
