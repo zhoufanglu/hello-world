@@ -3,6 +3,12 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+/**
+ *mock
+ */
+import MockFn from '@/assets/js/mock/mockServer.js'
+MockFn(true)
+
 import prototype from '@/assets/js/prototype'
 Vue.use(prototype)
 /**
@@ -19,6 +25,7 @@ import { Button, Select, Form ,Radio } from 'element-ui';
 Vue.use(Button)
 Vue.use(Form)
 Vue.use(Radio)
+
 
 Vue.config.productionTip = false
 

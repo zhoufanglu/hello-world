@@ -38,7 +38,7 @@
     created(){
       //console.log(26,this);
       this.change()
-      this.apiTest()
+      //this.apiTest()
     },
     methods:{
       change(){
@@ -80,17 +80,17 @@
       add(){
         this.increment()
       },
+      load(){
+        //console.log(84,this.$api.store.getMockServerTest())
+        this.$api.store.getMockServerTest().then(res=>{
+          console.log(85,res.data)
+        })
+      },
       ...mapMutations(['increment']),
       ...mapActions(['increment','changeTest'])
     },
     mounted(){
-      let name = 'lfz'
-      load({name:'666',age:'17'})
-      function load({name}){
-
-      }
-      //this.change()
-      //console.log(47,this.mixins);
+      this.load()
     },
     computed:{
       fullName(){
