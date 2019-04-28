@@ -16,6 +16,9 @@ const mockFn = isOpen =>{
   Mock.mock('/store/test',{
     a:'123'
   })
+  Mock.mock('/login',{
+    result: '登录成功'
+  })
 }
 export default mockFn
 

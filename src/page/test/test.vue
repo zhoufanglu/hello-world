@@ -21,7 +21,7 @@
         <hr>
         <div>
             <h4>action</h4>
-            <div>{{countTest}}</div>
+            <div></div>
             <button @click="add">add</button>
         </div>
             <el-button>默认按钮</el-button>
@@ -83,7 +83,7 @@
       load(){
         //console.log(84,this.$api.store.getMockServerTest())
         this.$api.store.getMockServerTest().then(res=>{
-          console.log(85,res.data)
+          //console.log(85,res.data)
         })
       },
       ...mapMutations(['increment']),
@@ -96,7 +96,7 @@
       fullName(){
         return this.firstName+ ' '+this.lastName
       },
-      ...mapState(['network','countTest'])
+      ...mapState(['network'])
     },
     watch:{
       fullName(newVal,oldVal){

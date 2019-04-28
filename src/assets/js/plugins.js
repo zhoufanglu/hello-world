@@ -16,7 +16,7 @@ nprogress.configure({
 router.beforeEach((to, from , next) => {
   //未登录
   if(to.meta.requiresAuth){
-    if(!store.state.loginSuccess
+    if(!store.state.userInfo.isLogin
       &&(to.path!=='/login'&&to.path!=='/401')){
       next(`/401?redirect=${to.path}`)
     }
@@ -35,7 +35,8 @@ router.afterEach(() => {
 
 /**
  * 保持vuex内的数据刷新不消失
- */
+ * 这个有个缺陷，当你删除或者修改了state里面的参数，1、先注释掉下面的代码，2、删除localStore里面的参数，再刷新下就好了。。
+ * */
 //页面加载时把localStorage的数据放入vuex
 localStorage.getItem("vuexState(hello-world)")&&
 store.replaceState(

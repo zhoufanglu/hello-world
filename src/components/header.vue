@@ -4,7 +4,7 @@
     </div>
 </template>
 <script>
-    import {mapState,mapMutations,mapGetters } from 'vuex';
+    import {mapState,mapMutations,mapActions } from 'vuex';
   export default {
     name: '',
     data() {
@@ -12,13 +12,14 @@
     },
     methods: {
       logout(){
-        this.changeLogin(false)
+        this.changeUserInfo({})
         this.changeToken(false)
         this.$router.replace({
           path:'login'
         })
       },
-      ...mapMutations(['changeLogin','changeToken'])
+      ...mapMutations(['changeToken']),
+      ...mapActions(['changeUserInfo'])
     },
     components: {},
     mounted() {

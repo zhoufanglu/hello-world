@@ -19,7 +19,7 @@ export default new Router({
       path: '/home',
       name: 'Home',
       meta:{
-        requiresAuth:true,
+        requiresAuth:true,//是否要登录后查看
       },
       component: home
     },
