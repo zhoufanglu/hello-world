@@ -16,7 +16,7 @@
             <p>{{fullName}}</p>
             <p>{{count}}</p>
         </div>
-        <button @click="changeStore()">点击后假装断网</button>
+        <button @click="netWorkTest()">点击后假装断网</button>
         <button @click="goRefresh()">goRefresh【断网了就会自动去这个页面】</button>
         <hr>
         <div>
@@ -50,14 +50,15 @@
           //console.log(36,res)
         })
       },
-      changeStore(){
+      netWorkTest(){
         //this.$store.commit('changeNetwork',false)
         this.changeNetwork(false)
       },
       goRefresh(){
         this.$router.push({path:'refresh'})
       },
-      ...mapMutations(['changeNetwork','increment'])
+      ...mapMutations(['increment']),
+      ...mapActions(['changeNetwork'])
     }
   }
   export default {

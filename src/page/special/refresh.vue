@@ -1,6 +1,6 @@
 <template>
     <div class="refresh" v-if="!networkSuccess">
-        <h3>我断网了</h3>
+        <h3>糟糕，断网了！</h3>
         <button @click="onRefresh()">点我刷新</button>
     </div>
 </template>
