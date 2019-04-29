@@ -4,7 +4,7 @@
     </div>
 </template>
 <script>
-    import {mapState,mapMutations,mapActions } from 'vuex';
+  import {mapActions } from 'vuex';
   export default {
     name: '',
     data() {
@@ -18,8 +18,7 @@
           path:'login'
         })
       },
-      ...mapMutations(['changeToken']),
-      ...mapActions(['changeUserInfo'])
+      ...mapActions(['changeUserInfo','changeToken'])
     },
     components: {},
     mounted() {

@@ -24,7 +24,7 @@
     </div>
 </template>
 <script>
-  import {mapState,mapMutations,mapActions } from 'vuex'
+  import {mapState,mapActions } from 'vuex'
   import { validUsername } from '@/assets/js/utils/validate'
   export default {
     name: '',
@@ -93,8 +93,7 @@
         })
 
       },
-      ...mapMutations(['changeToken']),
-      ...mapActions(['changeUserInfo'])
+      ...mapActions(['changeUserInfo','changeToken'])
     },
     components: {},
     computed:{

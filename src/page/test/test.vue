@@ -31,7 +31,7 @@
 </template>
 <script>
   import testComponents from '@c/testComponents.vue'
-  import {mapState,mapMutations,mapActions } from 'vuex'
+  import {mapState,mapActions } from 'vuex'
   import headerContent from '@c/header.vue'
   //mixins 定义个对象（优先级全局mixins>局部mixins>局部mixins，全局定义mixins不要+s）
   const countConsole ={
@@ -57,7 +57,6 @@
       goRefresh(){
         this.$router.push({path:'refresh'})
       },
-      ...mapMutations(['increment']),
       ...mapActions(['changeNetwork'])
     }
   }
@@ -87,7 +86,6 @@
           //console.log(85,res.data)
         })
       },
-      ...mapMutations(['increment']),
       ...mapActions(['increment','changeTest'])
     },
     mounted(){
