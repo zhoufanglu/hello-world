@@ -1,5 +1,7 @@
 const path = require('path');
 
+const SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin');
+
 module.exports = {
   // 基本路径
   publicPath: process.env.NODE_ENV === 'production'
@@ -13,6 +15,29 @@ module.exports = {
   // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
   chainWebpack: () => {},
   configureWebpack: (config) => {
+    config.plugins.push(new SkeletonWebpackPlugin({
+      webpackConfig: {
+        entry: {
+          app: path.join(__dirname, './src/skeleton/entry-skeleton.js'),
+        }
+      },
+      minimize: true,
+      quiet: true,
+      router: {
+        mode: 'hash',
+        routes: [
+          {
+            path: '/home',
+            skeletonId: 'skeleton1'
+          },
+          {
+            path: '/test',
+            skeletonId: 'skeleton2'
+          }
+        ]
+      }
+    }))
+
     if (process.env.NODE_ENV === 'production') {
       // 为生产环境修改配置...
       config.mode = 'production';

@@ -1,7 +1,7 @@
 <template>
     <div class="test-components">
         <h4>this is slot</h4>
-        <slot name="footer" val="父组件的值">
+        <slot name="footer" :val="val">
         </slot>
     </div>
 </template>
@@ -11,7 +11,8 @@
     data(){
       return{
         num:100,
-        header:'子组件的头部消息'
+        header:'子组件的头部消息',
+        val:789
       }
     },
     methods:{

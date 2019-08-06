@@ -6,7 +6,7 @@
         <testComponents>
           <template v-slot:footer="slotProps">
               <div>父组件的元素</div>
-              {{slotProps.val}}
+              <h1>{{slotProps.val}}</h1>
           </template>
         </testComponents>
 
@@ -27,6 +27,54 @@
             <el-button>默认按钮</el-button>
             <el-radio v-model="radio" label="1">备选项</el-radio>
             <el-radio v-model="radio" label="2">备选项</el-radio>
+
+        <div class="test-89">
+            <div>1</div>
+            <div>2</div>
+        </div>
+
+        <table>
+            <thead>
+                <th>1</th>
+                <th>1</th>
+                <th>1</th>
+                <th>1</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="width: 100%;height: 200px;border: solid 1px red" class="flex-test">
+            <div>1</div>
+            <div>1</div>
+            <div>1</div>
+            <div>1</div>
+            <div>1</div>
+            <div>1</div>
+        </div>
     </div>
 </template>
 <script>
@@ -86,10 +134,202 @@
           //console.log(85,res.data)
         })
       },
-      ...mapActions(['increment','changeTest'])
+      quest_1(){
+        /*这是一道大题目，把考点拆成了4个小项；需要侯选人用递归算法实现（限制15行代码以内实现；限制时间10分钟内完成）：
+        a) 生成一个长度为5的空数组arr。
+        b) 生成一个（2－32）之间的随机整数rand。
+        c) 把随机数rand插入到数组arr内，如果数组arr内已存在与rand相同的数字，则重新生成随机数rand并插入到arr内[需要使用递归实现，不能使用for/while等循环]
+          d) 最终输出一个长度为5，且内容不重复的数组arr。*/
+        let arr = new Array(5)
+        //const rand = Math.floor(Math.random()*31+2)
+        const getRand =()=>{
+          return Math.floor(Math.random()*31+2)
+        }
+        let index = 0
+        const setArray =()=>{
+          const rand = getRand()
+          if(arr.indexOf(rand) === -1){
+            arr[index] = rand
+            index++
+          }else{
+            setArray()
+          }
+          if(index !== 5){
+            setArray()
+          }
+        }
+        setArray()
+        console.log(101,arr)
+      },
+      quest_2(){
+        //写一个方法去掉字符串中的空格，要求传入不同的类型分别能去掉前、后、前后、中间的空格
+        let string = ' asds  dsdds '
+        let arr = string.split(' ')
+        let newStr = ''
+        arr.map((item,index)=>{
+          newStr += item 
+        })
+        console.log(124,newStr)
+      },
+      quest_3(){
+        //去除字符串中最后一个指定的字符
+        let string = '12323sdaas2'
+        let delOne = '1'
+        delLastItem(string,'2')
+        /**
+         *
+         * @param string '字符串'
+         * @param delItem '删除的字符'
+         */
+        function delLastItem(string,delItem){
+          let arr = string.split('')
+          arr.map((item,index)=>{
+            if(delItem === item){
+              arr.splice(index,1)
+            }
+          })
+          console.log(136,arr.join(''))
+        }
+      },
+      quest_4(){
+        //写一个方法把下划线命名转成大驼峰命名 project_name->projectName
+        let str = 'project_name_a_a'
+        let arr = str.split('_')
+        let newStr = ''
+        arr.map((item,index)=>{
+          if(index !== 0){
+            newStr += toUpperCaseFirst(item)
+          }else{
+            newStr += item
+          }
+        })
+        console.log(newStr)
+        //name->Name
+        function toUpperCaseFirst(str) {
+          let arr = str.split('')
+          let list = ''
+          arr.map((item,index)=>{
+            if(index === 0){
+              list += item.toUpperCase()
+            }else{
+              list += item
+            }
+          })
+          return list
+        }
+
+      },
+      quest_5(){
+        //求整数的7倍 不用+-*/
+        num_7(5)
+        function num_7(x){
+          let arr = new Array(x)
+          let newArr = [...arr,...arr,...arr,...arr,...arr,...arr,...arr]
+          console.log(185,newArr.length)
+
+        }
+      },
+      quest_6(){
+        //写个方法随机打乱一个数组
+        /**
+         * 思路，打乱数组，就是打乱索引index
+         * 生成 0~arr.length之期间随机数，且不能重复，来作为索引
+         * 最后按照索引输出数组就Ok
+         */
+        let arr = [1,2,3,4,5]
+        //let index = Math.floor(Math.random()*(arr.length-1)+0)
+        let indexList = []
+        let n = 0
+        while (n < arr.length) {
+          let randomNum = Math.floor(Math.random() * (arr.length - 1) + 0)
+          if(indexList.indexOf(randomNum) === -1){
+            indexList.push(randomNum)
+          }
+          n++
+        }
+        console.log(208,indexList)
+      },
+      quest_7(){
+        var name = 'Tom';
+        (function() {
+          if (typeof name == 'undefined') {
+            var name = 'Jack';
+            console.log('Goodbye ' + name);
+          } else {
+            console.log('Hello ' + name);
+          }
+        })();
+      },
+      quest_8(){
+        //找出字符串中连续出现最多的字符和个数
+        /*'abcaakjbb' => {'a':2,'b':2}
+        'abbkejsbcccwqaa' => {'c':3}*/
+        findMaxCount('abbkejsbcccwqaa')
+        //层主比较low，用顺序比较法。。
+        function findMaxCount(string){
+          let arr = string.split('')
+          let objArr = [],max = 0
+          //1、第一个字符串和后面的字符串比较，相同+1,不同就break
+          for(let i=0;i<arr.length-1;i++){
+            let count = 0
+            for(let j=i+1;j<arr.length;j++){
+              if(arr[i] === arr[j]){
+                count++
+              }else{
+                break
+              }
+            }
+            //记住最大的数
+            if(max<=count){
+              max = count
+            }
+            //把每个字母比较出现的次数 放入新数组
+            objArr.push({
+              name: arr[i],
+              count: count+1
+            })
+          }
+          let returnArr = []
+          //通过max找出objArr中的字母，然后放入新数组
+          objArr.map((item)=>{
+            if(item.count === max+1){
+              returnArr.push(item)
+            }
+          })
+          console.log(returnArr)
+          return returnArr
+        }
+      },
+      quest_9(){
+        let a = {
+          name:'lfz',
+          family:{
+            father:'11',
+            mother:'22'
+          }
+        }
+        let b = {...a}
+        a.name = 'sxy'
+        a.family.father='666'
+        console.log("a:",a)
+        console.log("b:",b)
+        //Symbol(b)
+        console.log(317,Symbol(b).constructor )
+      },
+      ...mapActions(['increment','changeTest']),
     },
     mounted(){
-      this.load()
+      //this.load()
+      //算法
+      //this.quest_1()
+      //this.quest_2()
+      //this.quest_3()
+      //this.quest_4()
+      //this.quest_5()
+      //this.quest_6()
+      //this.quest_7()
+      //this.quest_8()
+      this.quest_9()
     },
     computed:{
       fullName(){
@@ -110,6 +350,27 @@
 </script>
 <style lang="scss">
     .test{
+        .test-89{
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+            border: solid 1px greenyellow;
+            >div:first-child{
+                height: 300px;
+                border: solid 1px red;
+            }
+            >div:last-child{
+                height: 100%;
+                border: solid 1px blue;
 
+            }
+        }
+        .flex-test{
+            display: flex;
+            >div{
+                border: solid 1px blue;
+                flex: 1;
+            }
+        }
     }
 </style>
