@@ -2,6 +2,24 @@
     <div class="test">
         <header-content></header-content>
         <div>test</div>
+
+        <!--<facebook-loader></facebook-loader>-->
+        <div>
+            <content-loader
+                    :height="300"
+                    :width="280"
+                    :speed="2"
+                    primaryColor="#f3f3f3"
+                    secondaryColor="#fdfbdb"
+            >
+                <rect x="106" y="20" rx="4" ry="4" width="50" height="6" />
+                <rect x="40" y="40" rx="3" ry="3" width="200" height="6" />
+                <rect x="40" y="60" rx="3" ry="3" width="200" height="6" />
+                <rect x="40" y="80" rx="3" ry="3" width="200" height="6" />
+                <rect x="106" y="100" rx="4" ry="4" width="50" height="6" />
+            </content-loader>
+        </div>
+
         <router-link to="/home">goHome</router-link>
         <testComponents>
           <template v-slot:footer="slotProps">
@@ -81,6 +99,7 @@
   import testComponents from '@c/testComponents.vue'
   import {mapState,mapActions } from 'vuex'
   import headerContent from '@c/header.vue'
+  import {FacebookLoader,ContentLoader } from 'vue-content-loader'
   //mixins 定义个对象（优先级全局mixins>局部mixins>局部mixins，全局定义mixins不要+s）
   const countConsole ={
     created(){
@@ -300,21 +319,29 @@
           return returnArr
         }
       },
-      quest_9(){
-        let a = {
-          name:'lfz',
-          family:{
-            father:'11',
-            mother:'22'
-          }
+      quest_9(){/*
+        function sleep(time) {
+          return new Promise((resolve, reject) => {
+            setTimeout(()=>{
+              resolve()
+            },time)
+          })
         }
-        let b = {...a}
-        a.name = 'sxy'
-        a.family.father='666'
-        console.log("a:",a)
-        console.log("b:",b)
-        //Symbol(b)
-        console.log(317,Symbol(b).constructor )
+        
+        async function loopLight(){
+          await sleep(2000).then(()=>{
+            console.log('xx')
+          })
+        }
+        loopLight()*/
+        var a = {n: 1};
+        var b = a; // b = {n:1}
+        /*a.x = a
+        a = {n:2}*/
+        //a.x = a = {n: 2}; //{n:2,}
+        console.log(a.x,b.x)
+
+
       },
       ...mapActions(['increment','changeTest']),
     },
@@ -344,7 +371,9 @@
     },
     components:{
       testComponents,
-      headerContent
+      headerContent,
+      FacebookLoader,
+      ContentLoader
     }
   }
 </script>

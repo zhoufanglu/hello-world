@@ -25,8 +25,6 @@ npm run test
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 功能
 * 这是一个`Vue-cli3`的一个通用的项目模板
@@ -40,5 +38,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 > 未登录时，进入需要登录的页面，跳转登录页面
 
 > 登录后，跳转到原来点击的页面
+
+### 3、新增骨架屏 skeleton
+ * `vue-skeleton-webpack-plugin`
+ * `vue-content-loader`
+ * [详情地址](https://juejin.im/post/5d48e1c96fb9a06ac8242cc1#heading-6)
 
 

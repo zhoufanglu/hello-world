@@ -31,6 +31,10 @@ module.exports = {
             skeletonId: 'skeleton1'
           },
           {
+            path: '/login',
+            skeletonId: 'loginSkeleton'
+          },
+          {
             path: '/test',
             skeletonId: 'skeleton2'
           }
