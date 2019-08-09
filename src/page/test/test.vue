@@ -2,7 +2,11 @@
     <div class="test">
         <header-content></header-content>
         <div>test</div>
-
+        <div class="father">
+            <div class="child">1</div>
+            <div class="child">2</div>
+            <div class="child">3</div>
+        </div>
         <!--<facebook-loader></facebook-loader>-->
         <div>
             <content-loader
@@ -343,6 +347,31 @@
 
 
       },
+      quest_10(){
+        console.log('-------------------')
+        let person = {
+          name: 'lfz',
+          age: 23
+        }
+        let obj = new Proxy(person,{
+          get (target, key ){
+            if(key in target){
+              return target[key]
+            }else{
+              console.log('没有此属性')
+            }
+          },
+          /*set (target,key,value) {
+            target[key] = value
+            console.log(356,value)
+          }*/
+        })
+        obj.age = -1
+        obj.age = 22
+        console.log(365,obj.age)
+        console.log(354,obj.name)
+
+      },
       ...mapActions(['increment','changeTest']),
     },
     mounted(){
@@ -356,7 +385,8 @@
       //this.quest_6()
       //this.quest_7()
       //this.quest_8()
-      this.quest_9()
+      //this.quest_9()
+      this.quest_10()
     },
     computed:{
       fullName(){
@@ -399,6 +429,12 @@
             >div{
                 border: solid 1px blue;
                 flex: 1;
+            }
+        }
+        .father{
+            border: solid 1px red;
+            >div+div{
+                border-top: solid 1px blue;
             }
         }
     }
