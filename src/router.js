@@ -16,10 +16,15 @@ const refresh = ()=> import('@/page/special/refresh.vue')
 export default new Router({
   routes: [
     {
+      path:'/',
+      redirect:{name:'login'}
+    },
+    {
       path: '/home',
       name: 'Home',
       meta:{
         requiresAuth:true,//是否要登录后查看
+        keepAlive: false
       },
       component: home
     },
@@ -39,6 +44,7 @@ export default new Router({
       hidden:true,
       meta:{
         requiresAuth:true,
+        keepAlive:true
       },
       component: test
     },

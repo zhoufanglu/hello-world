@@ -1,15 +1,20 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
     <div class="test">
         <header-content></header-content>
+        <!--promise-->
+        <h1>mise</h1>
+        <div v-for="i in promiseList">{{i}}</div>
+
         <div>test</div>
         <div class="father">
             <div class="child">1</div>
             <div class="child">2</div>
             <div class="child">3</div>
+            <div v-for="i in storeList">{{i}}</div>
         </div>
         <!--<facebook-loader></facebook-loader>-->
         <div>
-            <content-loader
+            <!--<content-loader
                     :height="300"
                     :width="280"
                     :speed="2"
@@ -21,15 +26,17 @@
                 <rect x="40" y="60" rx="3" ry="3" width="200" height="6" />
                 <rect x="40" y="80" rx="3" ry="3" width="200" height="6" />
                 <rect x="106" y="100" rx="4" ry="4" width="50" height="6" />
-            </content-loader>
+            </content-loader>-->
         </div>
 
         <router-link to="/home">goHome</router-link>
-        <testComponents>
-          <template v-slot:footer="slotProps">
-              <div>父组件的元素</div>
-              <h1>{{slotProps.val}}</h1>
-          </template>
+        <button @click="fatherFn">父组件事件</button>
+
+        <testComponents ref="testComponent">
+            <template v-slot:footer="slotProps">
+                <div>父组件的元素</div>
+                <h1>{{slotProps.val}}</h1>
+            </template>
         </testComponents>
 
         <div id="root">
@@ -97,6 +104,19 @@
             <div>1</div>
             <div>1</div>
         </div>
+
+        <!--数据响应失效-->
+        <div>
+            <div v-for="(item,key) in list" :key="key">
+                ------
+                <div>{{computedTest(item)}}</div>
+            </div>
+            <button @click="changeList">失效</button>
+            <button @click="respondList">响应</button>
+            <div>-----------------</div>
+            {{list}}
+        </div>
+
     </div>
 </template>
 <script>
@@ -104,20 +124,27 @@
   import {mapState,mapActions } from 'vuex'
   import headerContent from '@c/header.vue'
   import {FacebookLoader,ContentLoader } from 'vue-content-loader'
+  import axios from 'axios'
   //mixins 定义个对象（优先级全局mixins>局部mixins>局部mixins，全局定义mixins不要+s）
   const countConsole ={
     created(){
       //console.log(26,this);
       this.change()
-      //this.apiTest()
+      this.apiTest()
     },
     methods:{
+      fatherFn(){
+        console.log('promise',this.promiseList)
+        console.log(129,this.$refs)
+        this.$refs.testComponent.$emit('fnTest','555')
+      },
       change(){
         //console.log('我是mixins');
       },
       apiTest(){
         //console.log(35,this.$api)
         this.$api.store.getStoreList({code:'utf-8',q:'手机'}).then(res=>{
+          this.storeList = res.data.result
           //console.log(36,res)
         })
       },
@@ -136,13 +163,30 @@
     mixins:[countConsole],
     data(){
       return{
+        render(){},
         radio:'',
         firstName:'',
         lastName:'',
         count:0 ,
+        list: [1,2,3],
+        promiseList:[],
+        storeList:[]
       }
     },
     methods: {
+      changeList () {
+        // 失效代码
+        //this.list[0] = 16
+        this.$set(this.list,0,666)
+        /*this.list.length = 0
+        console.log(163,this.list)*/
+      },
+      respondList () {
+        // 生效代码
+        this.list[2].money = 0
+        this.list[0] = 16
+        console.log(169,this.list[2].money)
+      },
       go() {
         this.$router.push({
           path: '/home'
@@ -347,31 +391,45 @@
 
 
       },
-      quest_10(){
-        console.log('-------------------')
-        let person = {
-          name: 'lfz',
-          age: 23
-        }
-        let obj = new Proxy(person,{
-          get (target, key ){
-            if(key in target){
-              return target[key]
-            }else{
-              console.log('没有此属性')
-            }
-          },
-          /*set (target,key,value) {
-            target[key] = value
-            console.log(356,value)
-          }*/
-        })
-        obj.age = -1
-        obj.age = 22
-        console.log(365,obj.age)
-        console.log(354,obj.name)
+      async quest_10() {
+        console.log(390,this)
+        const nameList = ['nice', 'david', 'tony']
+        //19 63 54
+        console.log('old', [19, 63, 54]) //显示顺序
 
+        for (let i of nameList) {
+          let val = await axios.get(
+            `https://api.agify.io/?name=${i}`,
+          )
+          this.promiseList.push(val.data.age)
+        }
+
+        console.log('-------')
+
+        let key = ['name']
+        const map = new Map([
+          [key, '张三'],
+          ['title', 'Author']
+        ])
+        console.log(407,map.get(key))
       },
+      quest_11(){
+        //编写一个函数，该函数将遍历整数列表，并在延迟3秒后打印每个元素的索引。
+        const arr = [1,2,3]
+        arr.map((item,index)=>{
+          setTimeout(()=>{
+            console.log(index)
+          },3000)
+        })
+
+        const arr2 = [10, 12, 15, 21];
+        for (let i = 0; i < arr2.length; i++) {
+          setTimeout(()=> {
+            console.log('The index of this number is: ' + i);
+          }, 3000);
+        }
+      },
+
       ...mapActions(['increment','changeTest']),
     },
     mounted(){
@@ -386,11 +444,17 @@
       //this.quest_7()
       //this.quest_8()
       //this.quest_9()
-      this.quest_10()
+      //this.quest_10()
+      //this.quest_11()
     },
     computed:{
       fullName(){
         return this.firstName+ ' '+this.lastName
+      },
+      computedTest(){
+        return function(val){
+          return val+'aaaaaaa'
+        }
       },
       ...mapState(['network'])
     },
@@ -426,9 +490,11 @@
         }
         .flex-test{
             display: flex;
+            flex-flow: row wrap;
             >div{
                 border: solid 1px blue;
-                flex: 1;
+                //flex: 1;
+                width: 300px;
             }
         }
         .father{

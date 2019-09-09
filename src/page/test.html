@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <button id="add">add</button>
+</head>
+<body>
+<script type="text/javascript">
+
+/*  class Person{
+    constructor(name,age){
+      this.name = name
+      this.age = age
+    }
+  }
+  let person1 = new Person('lfz',18)
+
+  class Person2 extends Person{
+    constructor(name,age,sex){
+      super(name,age)
+      this.sex = sex
+    }
+  }
+  console.log(new Person2('xxx',16,'boy'))*/
+  let arr = [2,7,7,2,1,3,4,5]
+console.log(27,arr)
+  let sortArr = arr.sort()
+    for(let i=0;i<sortArr.length-1;i++){
+        if(sortArr[i] === sortArr[i+1]){
+          for(let j = i+1;j<sortArr.length;j++){
+            sortArr[i] = sortArr[j]
+          }
+          sortArr.length--
+        }
+    }
+    sortArr.length--
+    console.log(36,sortArr)
+</script>
+</body>
+</html>
