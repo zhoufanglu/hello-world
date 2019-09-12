@@ -446,6 +446,24 @@
       //this.quest_9()
       //this.quest_10()
       //this.quest_11()
+      console.log('同步1')
+      setTimeout(()=>{
+        console.log('setTimeout',0)
+      },0)
+      setTimeout(()=>{
+        console.log('setTimeout',1)
+      },0)
+      setTimeout(()=>{
+        console.log('setTimeout',2)
+      },0)
+      let p = new Promise(resolve => {
+        console.log('555')
+         resolve()
+      })
+      p.then(()=>{
+        console.log('xxx666')
+      })
+      console.log('同步2')
     },
     computed:{
       fullName(){
