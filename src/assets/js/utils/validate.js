@@ -49,3 +49,8 @@ export function isArray(arg) {
   }
   return Array.isArray(arg)
 }
+
+//是否为空对象
+export function ObjectIsEmpty(o) {
+  return (Object.keys(o).length === 0)
+}
