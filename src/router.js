@@ -8,6 +8,7 @@ const error_404 = () => import('@/page/errorPage/error_404.vue')
 const error_401 = () => import('@/page/errorPage/error_401.vue')
 const home = ()=> import('@/page/home.vue')
 const test = ()=> import('@/page/test/test.vue')
+const test2 = ()=> import('@/page/test/test_2.vue')
 const login = ()=>import('@/page/login/login.vue')
 //special
 const refresh = ()=> import('@/page/special/refresh.vue')
@@ -47,6 +48,16 @@ export default new Router({
         keepAlive:true
       },
       component: test
+    },
+    {
+      path:'/test_2',
+      name:'Test2',
+      hidden:true,
+      meta:{
+        requiresAuth:true,
+        keepAlive:true
+      },
+      component: test2
     },
     {
       path:'/refresh',
