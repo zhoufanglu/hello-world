@@ -25,10 +25,37 @@
 
     },
     created(){
-      console.log('created')
+      let data = { foo: 'foo' }
+      let p = new Proxy(data, {
+        get(target, key, receiver) {
+          return target[key]
+        },
+        set(target, key, value, receiver) {
+          console.log('set value',value)
+          target[key] = value // ?
+          return true
+        }
+      })
+
+      console.log(40,p.foo='xx')
+      console.log(41,p.foo='yy')
+
+
     },
     mounted() {
-        this.list = []
+
+      this.list = []
+
+      let handler = {
+        get: function(target, name){
+          console.log(35,target)
+          return name in target ? target[name] : 37;
+        }
+      }
+      let p = new Proxy({}, handler);
+
+
+
     },
     computed:{
       computeVal(){
@@ -45,7 +72,7 @@
     },
     watch:{
       list(){
-        console.log(48,this)
+        //console.log(48,this)
       }
     }
 

@@ -10,6 +10,9 @@ const home = ()=> import('@/page/home.vue')
 const test = ()=> import('@/page/test/test.vue')
 const test2 = ()=> import('@/page/test/test_2.vue')
 const login = ()=>import('@/page/login/login.vue')
+const father = ()=>import('@/page/routerStudy/father.vue')
+const a = ()=>import('@/page/routerStudy/children/a.vue')
+const b = ()=>import('@/page/routerStudy/children/b.vue')
 //special
 const refresh = ()=> import('@/page/special/refresh.vue')
 
@@ -68,6 +71,21 @@ export default new Router({
       path:'/login',
       name:'login',
       component: login
+    },
+    {
+      path:'/father',
+      name:'father',
+      component: father,
+      children: [
+        {
+          path: '/a',
+          component: a
+        },
+        {
+          path: '/b',
+          component: b
+        }
+      ]
     }
   ]
 })
