@@ -13,6 +13,7 @@ const login = ()=>import('@/page/login/login.vue')
 const father = ()=>import('@/page/routerStudy/father.vue')
 const a = ()=>import('@/page/routerStudy/children/a.vue')
 const b = ()=>import('@/page/routerStudy/children/b.vue')
+const c = ()=>import('@/page/routerStudy/children/c.vue')
 //special
 const refresh = ()=> import('@/page/special/refresh.vue')
 
@@ -79,11 +80,26 @@ export default new Router({
       children: [
         {
           path: '/a',
+          meta:{
+            title:'a',
+            roles:['admin']
+          },
           component: a
         },
         {
           path: '/b',
+          meta:{
+            title:'b',
+            roles:['user']
+          },
           component: b
+        },
+        {
+          path: '/c',
+          meta:{
+            title:'c',
+          },
+          component: c
         }
       ]
     }

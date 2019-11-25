@@ -24,6 +24,7 @@
             </el-menu>
         </div>
         <div class="bottom-content">
+            <div>{{$route.meta.roles}}</div>
             <div class="left-nav">
                 <el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
                     <el-submenu index="1" :collaspe="false">
@@ -39,6 +40,9 @@
                             <el-menu-item index="/b">
                                 <!--<router-link to="/b">bbb</router-link>-->
                                 <div @click="leftNavClick('b')">bbb</div>
+                            </el-menu-item>
+                            <el-menu-item index="/c">
+                                <div @click="leftNavClick('c')">ccc</div>
                             </el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>

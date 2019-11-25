@@ -38,14 +38,25 @@ let lufangzhou:Person = {
     sex: 'men',
     line:'167cm'
 }
-let arr: Array<any> = [
+/*let arr: Array<any> = [
     {name:'xxx'},
     {name:'yyy'}
-]
+]*/
 
 function testFoo():number{
     return 111
 }
-console.log(testFoo())
 
+let arr: Array<number> = [4, 2, 7, 3, 1,3,3,0]
+//console.log(51,arr)
+let n = arr.length
+while(n>=0){
+    for(let i=0;i<arr.length-1;i++){
+        if(arr[i]>arr[i+1]){
+            [arr[i],arr[i+1]] = [arr[i+1],arr[i]]
+        }
+    }
+    n--
+}
 
+//console.log(arr)

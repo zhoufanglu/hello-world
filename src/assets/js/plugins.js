@@ -5,6 +5,8 @@ import 'nprogress/nprogress.css'
 //vuex
 import store from '@/store'
 
+import {Message} from 'element-ui'
+
 nprogress.configure({
   easing: 'ease',  // 动画方式
   speed: 500,  // 递增进度条的速度
@@ -19,6 +21,14 @@ router.beforeEach((to, from , next) => {
     if(!store.state.userInfo.isLogin
       &&(to.path!=='/login'&&to.path!=='/401')){
       next(`/401?redirect=${to.path}`)
+    }
+  }
+  //根据meta内的roles属性来判断有没有权限访问此路由
+  if(to.meta.hasOwnProperty('roles')){
+    if(to.meta.roles.includes(store.state.userInfo.userName)){
+      console.log('有权限')
+    }else{
+      Message('没有权限进入此页面')
     }
   }
   // 每次切换页面时，调用进度条
