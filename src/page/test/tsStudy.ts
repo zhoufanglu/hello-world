@@ -60,3 +60,5 @@ while(n>=0){
 }
 
 //console.log(arr)
+let isShow:boolean = false
+console.log(64,isShow)

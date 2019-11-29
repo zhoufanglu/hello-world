@@ -1,13 +1,41 @@
 <template>
     <div class="p-index">
-        aaaaaaaaa
+        <h3>aaaaaa</h3>
+        <div class="masonry">
+            <!-- 第一列 -->
+            <div class="column">
+                <div>第一列</div>
+                <div class="item" v-for="(i,index) in col_1" :key="i.value">
+                    <img :src="i.img" :alt="i.value">
+                </div>
+            </div>
+            <!-- 第二列 -->
+            <div class="column">
+                <div>第二列</div>
+                <div class="item" v-for="(i,index) in col_2" :key="i.value">
+                    <img :src="i.img" :alt="i.value">
+                </div>
+            </div>
+            <!-- 第三列 -->
+            <div class="column">
+                <div>第三列</div>
+                <div class="item" v-for="(i,index) in col_3" :key="i.value">
+                    <img :src="i.img" :alt="i.value">
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
+    import data from "./data";
   export default {
     name: '',
     data() {
-      return {}
+      return {
+        col_1:[],
+        col_2:[],
+        col_3:[],
+      }
     },
     methods: {
      /* /!**
@@ -93,6 +121,25 @@
           lastArr.push(obj)
         })
         console.log(80, lastArr)
+      },
+      initMasonryData(){
+        let n = 0
+        //console.log(124, data[1])
+        while (n < data.length) {
+          this.col_1.push(data[n++])
+          //++n
+          if(data[n]){
+            this.col_2.push(data[n++])
+          }
+          //++n
+          if(data[n]){
+            this.col_3.push(data[n++])
+          }
+          //++n
+        }
+        console.log(111,this.col_1)
+        console.log(222,this.col_2)
+        console.log(333,this.col_3)
       }
     },
     components: {},
@@ -101,10 +148,27 @@
       this.getData([1, 2 ,3,4,5,6,7,8,9,10,11,12,13,14,15])
       console.timeEnd()*/
       this.mergeArr()
+      //初始化瀑布布局
+      this.initMasonryData()
     }
   }
 </script>
 <style lang="scss" scoped>
     .p-index {
+        .masonry {
+            display: flex; // 设置为Flex容器
+            //flex-direction: ro; // 主轴方向设置为水平方向
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            //flex: 1;
+            padding: 0 2px;
+            .item {
+                margin-bottom: 5px;
+                width: 100%;
+            }
+        }
     }
 </style>
