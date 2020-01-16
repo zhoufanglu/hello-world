@@ -13,7 +13,7 @@
 
 <script>
     import {formatDateTime} from "../../assets/js/utils/validate";
-
+    import axios from 'axios'
     export default {
         name: "test_2",
         data() {
@@ -35,6 +35,27 @@
         methods: {
             changeAge(){
                 this.obj.father.age = 19
+            },
+            async promiseTest(){
+                /**
+                 * resolve成功回调，reject失败回调
+                 * promise
+                 * */
+                /*return new Promise((resolve, reject)=>{
+                    axios.get(
+                        `https://api.agify.io/?name=手机`
+                    ).then(res=>{
+                        resolve(res)
+                    }).catch(err=>{
+                        reject(err)
+                    })
+                })*/
+                /**
+                 * await
+                 */
+                return await axios.get(
+                    `https://api.agify.io/?name=鸡儿`
+                )
             }
         },
         created() {
@@ -56,8 +77,13 @@
 
         },
         mounted() {
-
-
+            const promiseObj = this.promiseTest()
+            console.log(74, promiseObj)
+            promiseObj.then(res=>{
+                console.log(76, res)
+            }).catch(err=>{
+                console.log(err)
+            })
         },
         computed: {
             computeVal() {
