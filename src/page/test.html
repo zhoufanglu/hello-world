@@ -27,10 +27,20 @@
 </head>
 <body>
 <script type="text/javascript">
-    function foo() {
-        console.log(31, arguments)
+    //闭包
+    var scope = "global scope";
+    function checkscope(){
+        var scope = "local scope";
+        function f(){
+            return scope;
+        }
+        return f;
     }
-    foo(1,2,3,4)
+    console.log(checkscope()())
+
+    var foo = checkscope();
+    console.log(42, foo())
+
 </script>
 </body>
 
