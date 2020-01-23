@@ -8,6 +8,16 @@
         </ul>
         <button @click="changeAge">点我改变多层obj数据</button>
         <span>age:{{obj.father.age}}</span>
+
+        <h3>flex shrink</h3>
+        <div class="shrink-panel">
+            <div class="left">
+                1
+            </div>
+            <div class="right">
+                2
+            </div>
+        </div>
     </div>
 </template>
 
@@ -108,5 +118,20 @@
 </script>
 <div>sds</div>
 <style lang="scss" scoped>
-
+.shrink-panel{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: solid 1px red;
+    .left{
+        flex-shrink: 1;
+        width: 200px;
+        border: solid 1px green;
+    }
+    .right{
+        flex-shrink: 2;
+        width: 100%;
+        border: solid 1px blue;
+    }
+}
 </style>
