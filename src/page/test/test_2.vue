@@ -18,6 +18,61 @@
                 2
             </div>
         </div>
+
+        <h3>el-table</h3>
+        <div>
+            <el-table
+                :data="tableData"
+            >
+                <!--<el-table-column
+                   v-for="(i,index) in tableLabel"
+                   :key="index"
+                   :prop="i.prop"
+                   :label="i.label"
+                >
+                </el-table-column>-->
+                <el-table-column
+                    label="时间测试"
+                    prop="date"
+                    :formatter="testFn"
+                >
+
+                </el-table-column>
+
+                <el-table-column
+                        v-for="(i,index) in tableLabel"
+                        :key="index"
+                        :prop="i.prop"
+                        :label="i.label"
+                        :formatter="tdformat"
+                >
+                    <!--<template>
+                        <div>{{scope.row.type}}</div>
+                    </template>-->
+                    <!--<template slot="header"
+                              slot-scope="scope"
+                    >
+                        <div>{{i.prop}}</div>
+                    </template>-->
+
+                    <template slot-scope="scope">
+                        <div>{{scope.row[i.prop].type}}</div>
+                        <!--<div v-if="scope.row.type === 'input'">
+                            <input type="text" :value="scope.row[i.prop]">
+                        </div>
+                        <div v-if="scope.row.type === 'normal'">
+                            <div>{{scope.row[i.prop]}}</div>
+                        </div>
+                        <div v-if="scope.row.type === 'select'">
+                            <select>
+                                <option value="">{{scope.row[i.prop]}}</option>
+                            </select>
+                        </div>-->
+                    </template>
+
+                </el-table-column>
+            </el-table>
+        </div>
     </div>
 </template>
 
@@ -39,10 +94,40 @@
                         name:'lfz',
                         age: 16
                     }
-                }
+                },
+                tableLabel: [
+                    {label: '日期',id: 0, prop: 'date'},
+                    {label: '姓名',id: 1, prop: 'name'},
+                    {label: '年龄',id: 2, prop: 'age'},
+                ],
+                tableData: [
+                    {
+                        date: {
+                            label: '2020-01-01',
+                            type: 'normal'
+                        },
+                        name: {
+                            label: '狗',
+                            type: 'input'
+                        },
+                        age: {
+                            label: 10,
+                            type: 'normal'
+                        },
+                        test: false
+                    },
+                ]
             }
         },
         methods: {
+            testFn(){
+                console.log('aaa')
+            },
+            tdformat(row, column){
+                console.log('aaa')
+                console.log(109, row)
+                console.log(110, column)
+            },
             changeAge(){
                 this.obj.father.age = 19
             },
