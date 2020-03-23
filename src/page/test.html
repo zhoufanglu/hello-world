@@ -15,6 +15,36 @@
         margin: -200px -100px 0 0;
         background-color: #666666;
     }
+    .father{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: solid 1px red;
+    }
+    .child{
+        border: solid 1px black;
+    }
+
+    .item{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+    }
+    .left{
+        width: 100%;
+    }
+    .right{
+        width: 150px;
+    }
+
+    .left{
+        border: solid 1px red;
+    }
+    .right{
+        border: solid 1px green;
+    }
+
 </style>
 <head>
     <meta charset="UTF-8">
@@ -23,6 +53,22 @@
         <div class="panel">
 
         </div>
+    </div>
+    <div class="father">
+        <div class="child">
+            1
+        </div>
+        <div class="child">
+            1
+        </div>
+        <div class="child">
+            1
+        </div>
+    </div>
+
+    <div class="item">
+        <div class="left">left</div>
+        <div class="right">right</div>
     </div>
 </head>
 <body>
@@ -55,7 +101,35 @@
     let pB = new PersonB({name:'sxy', age: 26, sex: '女'})
 
     console.log(45, pB)//{name: "sxy", age: 26, sex: "女"}
-    
+
+    /**
+     * var array1 = [0,15,9,80,5,34,27,8] 排序
+     */
+
+    /*array1.sort((x, y) => {
+        return x - y > 0
+    })
+
+    console.log('-----')
+    for(var i=0;i<10;i++){
+        setTimeout(function(){
+            console.log(i);
+        },i*1000)
+    }*/
+
+    console.log('----')
+    const array1 = [0, 15, 9, 80, 5, 34, 27, 8]
+    for(let i=0;i<array1.length-1;i++){
+        for(let j=i+1;j<array1.length;j++){
+            if (array1[i] > array1[j]) {
+                let item = array1[i]
+                array1[i] = array1[j]
+                array1[j] = item
+            }
+        }
+    }
+    console.log(131, array1)
+
 </script>
 </body>
 

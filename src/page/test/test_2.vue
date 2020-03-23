@@ -1,6 +1,7 @@
 <template>
     <div>
         <h2>test_2...</h2>
+        <div @click="go">go test_3</div>
         <ul>
             <li v-for="(i,index) in list" :key="index">{{ i.name | filtersName }}</li>
             ----
@@ -120,6 +121,9 @@
             }
         },
         methods: {
+            go() {
+                this.$router.push({path:'/test_3'})
+            },
             testFn(){
                 console.log('aaa')
             },
