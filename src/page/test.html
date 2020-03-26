@@ -118,7 +118,7 @@
     }*/
 
     console.log('----')
-    const array1 = [0, 15, 9, 80, 5, 34, 27, 8]
+    /*const array1 = [0, 15, 9, 80, 5, 34, 27, 8]
     for(let i=0;i<array1.length-1;i++){
         for(let j=i+1;j<array1.length;j++){
             if (array1[i] > array1[j]) {
@@ -128,7 +128,16 @@
             }
         }
     }
-    console.log(131, array1)
+    console.log(131, array1)*/
+
+    var array = [];
+    for(var i = 0; i <3; i++) {
+        console.log(i)
+        array.push(() => i);
+    }
+    var newArray = array.map(el => el());
+    console.log(newArray); // ??
+
 
 </script>
 </body>

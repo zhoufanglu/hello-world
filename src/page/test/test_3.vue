@@ -13,15 +13,27 @@
             <div class="right">right</div>
         </div>
 
+        <div style="margin-top: 30px; border: solid 1px green">
+            <com_b
+                    :test3Val_1="test3Val_1"
+                    :test3Val_2="test3Val_2"
+            ></com_b>
+        </div>
+
     </div>
 </template>
 
 <script>
+    import com_b from "@c/com_b.vue";
+    //import testComponents from "@c/testComponents.vue";
     export default {
         name: "test_3",
+        components:{com_b},
         data() {
             return {
-                testVal:'我是data里面的数据'
+                testVal:'我是data里面的数据',
+                test3Val_1: '1111',
+                test3Val_2: '2222',
             }
         },
         methods:{
@@ -29,17 +41,11 @@
                 this.$router.push({path:'/test_2'})
             }
         },
-        beforeCreate() {
-            console.log('beforeCreate', this)
-        },
         created() {
-            console.log('我是created')
-            console.log(this.testVal)
+
         },
         mounted() {
-            JSON.parse(JSON.stringify(obj))
-            console.log('我是mounted')
-            console.log(this.testVal)
+           
         }
     }
 </script>
