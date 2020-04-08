@@ -16,6 +16,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",
     "@vue/cli-service": "^3.5.0",
+    "aos": "^3.0.0-beta.6",
     "axios": "^0.18.0",
     "babel-plugin-component": "^1.1.1",
     "cross-env": "^5.2.1",
