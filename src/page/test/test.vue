@@ -473,6 +473,7 @@
 </script>
 <style lang="scss">
     .test{
+        color: $testGreen;
         .test-89{
             display: flex;
             flex-direction: column;

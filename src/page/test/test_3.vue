@@ -46,7 +46,7 @@
 <script>
     //版本问题 这版本不用aos
     import com_b from "@c/com_b.vue";
-    import AOS from "../../assets/js/aos2/aos.js"
+    //import AOS from "../../assets/js/aos2/aos.js"
     //import testComponents from "@c/testComponents.vue";
 
     import fnCom from "../../components/fnCom.vue";

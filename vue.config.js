@@ -70,7 +70,11 @@ module.exports = {
     // 开启 CSS source maps?
     sourceMap: false,
     // css预设器配置项
-    loaderOptions: {},
+    loaderOptions: {
+      sass: {
+        data: `@import "@/assets/scss/global.scss";`
+      }
+    },
     // 启用 CSS modules for all css / pre-processor files.
     modules: false
   },
