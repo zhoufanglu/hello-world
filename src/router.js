@@ -15,6 +15,8 @@ const father = ()=>import('@/page/routerStudy/father.vue')
 const a = ()=>import('@/page/routerStudy/children/a.vue')
 const b = ()=>import('@/page/routerStudy/children/b.vue')
 const c = ()=>import('@/page/routerStudy/children/c.vue')
+//eventBus
+const busFather = ()=>import('@/page/eventBusTest/busFather.vue')
 //special
 const refresh = ()=> import('@/page/special/refresh.vue')
 
@@ -112,6 +114,11 @@ export default new Router({
           component: c
         }
       ]
+    },
+    {
+      path: '/busFather',
+      name: 'busFather',
+      component: busFather,
     }
   ]
 })

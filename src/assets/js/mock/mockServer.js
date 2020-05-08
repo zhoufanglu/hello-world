@@ -14,7 +14,8 @@ const mockFn = isOpen =>{
   if(!isOpen)
     return false
   Mock.mock('/store/test',{
-    a:'123'
+    a:'123',
+    img: Random.image(Random.size, '#02adea', 'Hello')
   })
   Mock.mock('/login',{
     result: '登录成功'

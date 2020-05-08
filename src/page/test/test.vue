@@ -147,6 +147,10 @@
           this.storeList = res.data.result
           //console.log(36,res)
         })
+          /*console.log('xxx')
+          this.$api.store.getMockServerTest((res)=>{
+              console.log(151, res)
+          })*/
       },
       netWorkTest(){
         //this.$store.commit('changeNetwork',false)
@@ -197,9 +201,9 @@
       },
       load(){
         //console.log(84,this.$api.store.getMockServerTest())
-        this.$api.store.getMockServerTest().then(res=>{
-          //console.log(85,res.data)
-        })
+        /*this.$api.store.getMockServerTest().then(res=>{
+          console.log(85,res.data)
+        })*/
       },
       quest_1(){
         /*这是一道大题目，把考点拆成了4个小项；需要侯选人用递归算法实现（限制15行代码以内实现；限制时间10分钟内完成）：
@@ -433,7 +437,7 @@
       ...mapActions(['increment','changeTest']),
     },
     mounted(){
-      //this.load()
+      this.load()
       //算法
       //this.quest_1()
       //this.quest_2()
