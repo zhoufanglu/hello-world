@@ -79,6 +79,7 @@
 
 <script>
     import {formatDateTime} from "../../assets/js/utils/validate";
+    import {mapState,mapMutations,mapGetters } from 'vuex';
     import axios from 'axios'
     export default {
         name: "test_2",
@@ -183,6 +184,7 @@
             }).catch(err=>{
                 console.log(err)
             })
+            console.log(188, this.age)
         },
         computed: {
             computeVal() {
@@ -190,7 +192,14 @@
                     console.log('computed')
                     return val.toUpperCase()
                 }
-            }
+            },
+            ...mapState({
+                moduleVal: state => {
+                    console.log(29, state)
+                    return state.a.moduleVal
+                },
+                age: state => state.a.age,
+            })
         },
         filters: {
             filtersName(name) {

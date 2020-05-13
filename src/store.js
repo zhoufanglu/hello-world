@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '@/router'
 import { Message } from 'element-ui'
+import moduleA from "./vuexModule/moduleA";
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -56,5 +57,8 @@ export default new Vuex.Store({
     changeToken({ commit }, val){
       commit('CHANGE_TOKEN', val)
     }
+  },
+  modules: {
+    a: moduleA
   }
 })

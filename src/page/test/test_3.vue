@@ -1,12 +1,15 @@
 <template>
     <div class="p-test3">
         <h2>test3</h2>
+        <h3>我的年龄{{age}}</h3>
         <div class="test-div">
             {{testVal}}
+            <div class="text-justify">名字<i></i></div>
         </div>
     </div>
 </template>
 <script>
+    import {mapState, mapMutations} from 'vuex';
     //版本问题 这版本不用aos
     export default {
         name: "test_3",
@@ -21,24 +24,37 @@
                 data_2: ''
             }
         },
+        computed: {
+            ...mapState({
+                moduleVal: state => {
+                    console.log(29, state)
+                    return state.a.moduleVal
+                },
+                age: state => state.a.age,
+            })
+        },
         methods:{
             go() {
-                this.$router.push({path:'/test_2'})
+                //this.$router.push({path:'/test_2'})
             },
             setTest_3Val(val){
                 this.childVal = val
-            }
+            },
+            ...mapMutations(['setAge'])
         },
         created() {
-            //console.log('-----------------')
-            let val_1 = 1
-            let val_2 = 2;
-            [this.data_1, this.data_2] = [val_1, val_2]
+            this.setAge('100')
+            console.log(40, this.$store)
+            console.log(43, this.moduleVal)
+            console.log(44, this.age)
         },
         mounted() {
-            this.testVal = 'xxxxx'
-            const dom = document.querySelector('.test-div')
-            console.log(40, dom.offsetHeight)
+            const arr = [1,2,3,4]
+            const res = arr.every((i,index)=>{
+                console.log(i)
+                return false
+            })
+            console.log(40, res) //false
 
         }
     }
@@ -80,6 +96,20 @@
             height: 200px;
             width: 200px;
             margin-top: 20px;
+        }
+    }
+    .text-div{
+        display: flex;
+    }
+    .text-justify{
+        display: inline-block;
+        width: 60px;
+        text-align: justify;
+        border: solid 1px red;
+        &:after {
+            content: " ";
+            display: inline-block;
+            width: 100%;
         }
     }
 </style>
