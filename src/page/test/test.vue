@@ -2,7 +2,8 @@
     <div class="test">
         <header-content></header-content>
         <!--promise-->
-        <h1>mise</h1>
+        <h1 style="font-size: 14px">mise</h1>
+        <div class="rem-test">rem test</div>
         <div v-for="i in promiseList">{{i}}</div>
 
         <div>test</div>
@@ -30,7 +31,7 @@
         </div>
 
         <router-link to="/home">goHome</router-link>
-        <button @click="fatherFn">父组件事件</button>
+        <button @click="fatherFn" style="font-size: 30px">父组件事件</button>
 
         <testComponents ref="testComponent">
             <template v-slot:footer="slotProps">
@@ -131,6 +132,7 @@
       //console.log(26,this);
       this.change()
       this.apiTest()
+        console.log(134, this.$route.params)
     },
     methods:{
       fatherFn(){
@@ -477,6 +479,10 @@
 </script>
 <style lang="scss">
     .test{
+        .rem-test{
+            font-size: 16px;
+            color: red!important;
+        }
         color: $testGreen;
         .test-89{
             display: flex;

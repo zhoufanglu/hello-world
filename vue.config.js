@@ -73,6 +73,16 @@ module.exports = {
     loaderOptions: {
       sass: {
         data: `@import "@/assets/scss/global.scss";`
+      },
+      postcss: {
+        plugins: [
+          require('postcss-plugin-px2rem')({
+            rootValue : 32,
+            exclude: /(node_modules)/, //不包括node_module
+            minPixelValue: 3, //设置要替换的最小像素值(3px会被转rem)。 默认 0
+            selectorBlackList: ["el-", "html"]
+          })
+        ]
       }
     },
     // 启用 CSS modules for all css / pre-processor files.
@@ -110,5 +120,5 @@ module.exports = {
   // 第三方插件配置
   pluginOptions: {
     // ...
-  }
+  },
 };

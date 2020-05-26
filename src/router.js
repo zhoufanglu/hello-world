@@ -47,11 +47,11 @@ export default new Router({
       component: error_401
     },
     {
-      path:'/test',
+      path:'/test/:personAge',
       name:'Test',
       hidden:true,
       meta:{
-        requiresAuth:true,
+        requiresAuth:false,
         keepAlive:true
       },
       component: test

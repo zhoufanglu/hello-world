@@ -24,6 +24,7 @@
     "mockjs": "^1.0.1-beta3",
     "node-sass": "^4.9.0",
     "nprogress": "^0.2.0",
+    "postcss-plugin-px2rem": "^0.8.1",
     "sass-loader": "^7.1.0",
     "vue-content-loader": "^0.2.2",
     "vue-skeleton-webpack-plugin": "^1.2.2",
