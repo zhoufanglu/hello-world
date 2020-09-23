@@ -5,6 +5,9 @@ import store from './store'
 
 import './assets/js/rem'
 
+import tagCloud from 'v-tag-cloud'
+Vue.use(tagCloud)
+
 /**
  *mock
  */

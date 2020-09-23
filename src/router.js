@@ -10,6 +10,7 @@ const home = ()=> import('@/page/home.vue')
 const test = ()=> import('@/page/test/test.vue')
 const test2 = ()=> import('@/page/test/test_2.vue')
 const test3 = ()=> import('@/page/test/test_3.vue')
+const lifeCycle = ()=> import('@/page/test/lifeCycle.vue')
 const login = ()=>import('@/page/login/login.vue')
 const father = ()=>import('@/page/routerStudy/father.vue')
 const a = ()=>import('@/page/routerStudy/children/a.vue')
@@ -74,6 +75,15 @@ export default new Router({
         keepAlive: false
       },
       component: test3
+    },{
+      path:'/lifeCycle',
+      name:'lifeCycle',
+      hidden:true,
+      meta:{
+        requiresAuth: false,
+        keepAlive: false
+      },
+      component: lifeCycle
     },
     {
       path:'/refresh',
