@@ -21,7 +21,6 @@
     "babel-plugin-component": "^1.1.1",
     "cross-env": "^5.2.1",
     "echarts": "^4.8.0",
-    "echarts-gl": "^1.1.1",
     "element-ui": "^2.7.2",
     "mockjs": "^1.0.1-beta3",
     "node-sass": "^4.9.0",
@@ -32,7 +31,8 @@
     "vue-content-loader": "^0.2.2",
     "vue-skeleton-webpack-plugin": "^1.2.2",
     "vue-template-compiler": "^2.5.21",
-    "vuedraggable": "^2.24.1"
+    "vuedraggable": "^2.24.1",
+    "webpack-bundle-analyzer": "^3.9.0"
   },
   "postcss": {
     "plugins": {

@@ -2,6 +2,9 @@ const path = require('path');
 
 const SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin');
 
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')//webpack的可视化资源分析工具
+
+
 module.exports = {
   // 基本路径
   /*publicPath: process.env.NODE_ENV === 'production'
@@ -12,6 +15,7 @@ module.exports = {
   outputDir: 'dist',
   // eslint-loader 是否在保存的时候检查
   lintOnSave: false,
+  productionSourceMap: false, //关闭SourceMap 不查看代码
   // webpack配置
   // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
   chainWebpack: () => {},
@@ -46,6 +50,23 @@ module.exports = {
     if (process.env.NODE_ENV === 'production') {
       // 为生产环境修改配置...
       config.mode = 'production';
+      //代码压缩
+      /*config.plugins.push(
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            //生产环境自动删除console
+            compress: {
+              warnings: false, // 若打包错误，则注释这行
+              drop_debugger: true,
+              drop_console: true,
+              pure_funcs: ['console.log']
+            }
+          },
+          sourceMap: false,
+          parallel: true
+        })
+      )*/
+
     } else {
       // 为开发环境修改配置...
       config.mode = 'development';
@@ -120,5 +141,10 @@ module.exports = {
   // 第三方插件配置
   pluginOptions: {
     // ...
+  },
+  chainWebpack: config => {
+    config
+      .plugin('webpack-bundle-analyzer')
+      .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
   },
 };
