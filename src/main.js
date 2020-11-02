@@ -13,9 +13,10 @@ Vue.use(tagCloud)
  */
 
 if(process.env.NODE_ENV === 'development'){
-const MockFn = require('@/assets/js/mock/mockServer')
-//import MockFn from '@/assets/js/mock/mockServer.js'
-  MockFn(true)
+  const MockFn = require('@/assets/js/mock/mockServer')
+  //import MockFn from '@/assets/js/mock/mockServer.js'
+  MockFn.default(true)
+  //MockFn(true)
 }
 
 import prototype from '@/assets/js/prototype'

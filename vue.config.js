@@ -3,7 +3,16 @@ const path = require('path');
 const SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin');
 
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')//webpack的可视化资源分析工具
+// gzip压缩
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
+//去除console.log
+const TerserPlugin = require('terser-webpack-plugin')
 
+
+
+const IS_PROD = ["production", "prod"].includes(process.env.NODE_ENV); //是否生产环境
+const IS_DEV = ["development", "dev"].includes(process.env.NODE_ENV); //是否开发环境
+const IS_GZIP = true; //是否开启Gzip压缩
 
 module.exports = {
   // 基本路径
@@ -18,7 +27,9 @@ module.exports = {
   productionSourceMap: false, //关闭SourceMap 不查看代码
   // webpack配置
   // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
-  chainWebpack: () => {},
+  chainWebpack: config => {
+
+  },
   configureWebpack: (config) => {
     config.plugins.push(new SkeletonWebpackPlugin({
       webpackConfig: {
@@ -47,26 +58,37 @@ module.exports = {
       }
     }))
 
-    if (process.env.NODE_ENV === 'production') {
+    if (IS_GZIP && IS_PROD) {
       // 为生产环境修改配置...
       config.mode = 'production';
       //代码压缩
-      /*config.plugins.push(
-        new UglifyJsPlugin({
-          uglifyOptions: {
-            //生产环境自动删除console
-            compress: {
-              warnings: false, // 若打包错误，则注释这行
-              drop_debugger: true,
-              drop_console: true,
-              pure_funcs: ['console.log']
-            }
-          },
-          sourceMap: false,
-          parallel: true
+      const productionGzipExtensions = ['html', 'js', 'css']
+      config.plugins.push(
+        new CompressionWebpackPlugin({
+          filename: '[path].gz[query]',
+          algorithm: 'gzip',
+          test: new RegExp(
+            '\\.(' + productionGzipExtensions.join('|') + ')$'
+          ),
+          threshold: 10240, // 只有大小大于该值的资源会被处理 10240
+          minRatio: 0.8, // 只有压缩率小于这个值的资源才会被处理
+          deleteOriginalAssets: false // 删除原文件
         })
-      )*/
-
+      )
+      //去除console
+      config.plugins.push(
+        new TerserPlugin({
+          cache: true,
+          parallel: true,
+          sourceMap: true,
+          terserOptions: {
+            compress: {
+              drop_console: true,
+              drop_debugger: true
+            }
+          }
+        })
+      )
     } else {
       // 为开发环境修改配置...
       config.mode = 'development';
@@ -143,8 +165,20 @@ module.exports = {
     // ...
   },
   chainWebpack: config => {
+    //webpack的可视化资源分析工具
+    process.env.VUE_APP_ENV === "analyz" &&
     config
       .plugin('webpack-bundle-analyzer')
       .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+    // 压缩图片
+    config.module
+      .rule("images")
+      .test(/\.(gif|png|jpe?g|svg)$/i)
+      .use("image-webpack-loader")
+      .loader("image-webpack-loader")
+      .options({
+        bypassOnDebug: true
+      })
+      .end();
   },
 };

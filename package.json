@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "devtest": "cross-env TESTING=true  node build/dev-server.js"
+    "devtest": "cross-env TESTING=true  node build/dev-server.js",
+    "test": "vue-cli-service test:unit",
+    "analyz": "vue-cli-service build --mode analyz"
   },
   "dependencies": {
     "core-js": "^2.6.5",
@@ -19,14 +21,17 @@
     "aos": "^3.0.0-beta.6",
     "axios": "^0.18.0",
     "babel-plugin-component": "^1.1.1",
+    "compression-webpack-plugin": "^6.0.4",
     "cross-env": "^5.2.1",
     "echarts": "^4.8.0",
     "element-ui": "^2.7.2",
+    "image-webpack-loader": "^7.0.1",
     "mockjs": "^1.0.1-beta3",
     "node-sass": "^4.9.0",
     "nprogress": "^0.2.0",
     "postcss-plugin-px2rem": "^0.8.1",
     "sass-loader": "^7.1.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "v-tag-cloud": "^1.0.3",
     "vue-content-loader": "^0.2.2",
     "vue-skeleton-webpack-plugin": "^1.2.2",
