@@ -16,7 +16,6 @@ nprogress.configure({
 })
 
 router.beforeEach((to, from , next) => {
-  console.time('loadTime')
   //未登录
   if(to.meta.requiresAuth){
     if(!store.state.userInfo.isLogin
@@ -39,7 +38,6 @@ router.beforeEach((to, from , next) => {
   next();
 });
 router.afterEach(() => {
-  console.timeEnd('loadTime')
   // 在即将进入新的页面组件前，关闭掉进度条
   nprogress.done()
 })

@@ -27,7 +27,11 @@
   import {mapState,mapActions } from 'vuex'
   import { validUsername } from '@/assets/js/utils/validate'
   export default {
-    name: '',
+    name: 'login',
+    beforeRouteEnter :(to,from,next)=>{
+      console.time('loadTime')
+      next()
+    },
     data() {
       const checkUserName = (rule, value, callback) => {
         if (value === '') {
@@ -104,6 +108,9 @@
       if(this.token){
         this.$router.go(-1)
       }
+      this.$nextTick(_=>{
+        console.timeEnd('loadTime')
+      })
     }
   }
 </script>

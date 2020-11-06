@@ -26,7 +26,12 @@ export default new Router({
   routes: [
     {
       path:'/',
-      redirect:{name:'login'}
+      redirect:{name:'login'},
+/*      beforeEnter:(to,from,next)=>{
+        console.log(to);
+        console.log(from);
+        next();
+      }*/
     },
     {
       path: '/home',
