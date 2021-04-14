@@ -7,7 +7,9 @@ import api from '@/request/api'
  * 按需引入
  */
 import '@/assets/scss/element/element-variables.scss'
-import { Button, Form ,Radio, Input, Select ,Checkbox, FormItem, Message, Menu, MenuItem, MenuItemGroup, Submenu,Table,TableColumn} from 'element-ui';
+import { Button, Form ,Radio, Input, Select ,Checkbox, FormItem, Message, Menu, MenuItem, MenuItemGroup, Submenu,Table,TableColumn,
+  Cascader, Carousel, CarouselItem
+} from 'element-ui';
 Vue.use(Button)
 Vue.use(Form)
 Vue.use(Radio)
@@ -20,7 +22,7 @@ Vue.use(MenuItem)
 Vue.use(MenuItemGroup)
 Vue.use(Submenu)
 Vue.use(Table)
-Vue.use(TableColumn)
+Vue.use(TableColumn).use(Cascader).use(Carousel).use(CarouselItem)
 //Vue.use(Message)
 Vue.component(Message.name, Message)
 

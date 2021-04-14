@@ -1,5 +1,6 @@
 <template>
     <div class="p-login-Skeleton">
+      我是登陆的骨架屏
         <content-loader
                 :height="300"
                 :width="280"

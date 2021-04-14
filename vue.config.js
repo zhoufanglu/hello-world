@@ -26,10 +26,6 @@ module.exports = {
   lintOnSave: false,
   productionSourceMap: false, //关闭SourceMap 不查看代码
   // webpack配置
-  // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
-  chainWebpack: config => {
-
-  },
   configureWebpack: (config) => {
     config.plugins.push(new SkeletonWebpackPlugin({
       webpackConfig: {
@@ -104,8 +100,6 @@ module.exports = {
       }
     });
   },
-  // 生产环境是否生成 sourceMap 文件
-  productionSourceMap: false,
   // css相关配置
   css: {
     // 是否使用css分离插件 ExtractTextPlugin
@@ -118,14 +112,14 @@ module.exports = {
         data: `@import "@/assets/scss/global.scss";`
       },
       postcss: {
-        plugins: [
+        /*plugins: [
           require('postcss-plugin-px2rem')({
             rootValue : 32,
             exclude: /(node_modules)/, //不包括node_module
             minPixelValue: 3, //设置要替换的最小像素值(3px会被转rem)。 默认 0
             selectorBlackList: ["el-", "html"]
           })
-        ]
+        ]*/
       }
     },
     // 启用 CSS modules for all css / pre-processor files.
@@ -140,10 +134,13 @@ module.exports = {
   // webpack-dev-server 相关配置
   devServer: {
     open: process.platform === 'darwin',
-    host: '0.0.0.0',
+    //host: '0.0.0.0',
+    public: '192.168.5.148:8081',
     port: 8080,
     https: false,
     hotOnly: false,
+    disableHostCheck: true,
+    hot: true,
     proxy: {
         // 设置代理
         // proxy all requests starting with /api to jsonplaceholder

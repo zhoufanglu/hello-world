@@ -20,6 +20,8 @@ const c = ()=>import('@/page/routerStudy/children/c.vue')
 const busFather = ()=>import('@/page/eventBusTest/busFather.vue')
 //special
 const refresh = ()=> import('@/page/special/refresh.vue')
+//step
+const step = ()=> import('@/page/step/stepMain.vue')
 
 
 export default new Router({
@@ -134,6 +136,11 @@ export default new Router({
       path: '/busFather',
       name: 'busFather',
       component: busFather,
+    },
+    {
+      path: '/step',
+      name: 'step',
+      component: step,
     }
   ]
 })

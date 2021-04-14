@@ -1,6 +1,13 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div class="test">
     <header-content></header-content>
+    <div>
+      <h1>级联test</h1>
+      <cascader></cascader>
+    </div>
+    <!------------------------------------------------------------------>
+    <i class="iconfont exit-icon"
+    >&#xe61f;</i>
     <!--promise-->
     <h1 style="font-size: 14px">mise</h1>
     <div class="rem-test">rem test</div>
@@ -126,6 +133,7 @@ import {mapState, mapActions} from 'vuex'
 import headerContent from '@c/header.vue'
 import {FacebookLoader, ContentLoader} from 'vue-content-loader'
 import axios from 'axios'
+import cascader from '@c/cascader.vue'
 //mixins 定义个对象（优先级全局mixins>局部mixins>局部mixins，全局定义mixins不要+s）
 const countConsole = {
   created() {
@@ -147,11 +155,11 @@ const countConsole = {
       //console.log(35,this.$api)
       /*this.$api.store.getStoreList({code:'utf-8',q:'手机'}).then(res=>{
         this.storeList = res.data.result
-        //console.log(36,res)
+        console.log(36,res)
       })*/
-
-      this.$api.store.getMockServerTest((res) => {
-        console.log(151, res)
+      //console.log(152, this.$api.store.getMockServerTest)
+      this.$api.store.getMockServerTest().then(res=>{
+        console.log(154, res.data)
       })
     },
     netWorkTest() {
@@ -386,7 +394,7 @@ export default {
             },time)
           })
         }
-        
+
         async function loopLight(){
           await sleep(2000).then(()=>{
             console.log('xx')
@@ -478,7 +486,8 @@ export default {
     testComponents,
     headerContent,
     FacebookLoader,
-    ContentLoader
+    ContentLoader,
+    cascader
   }
 }
 </script>
