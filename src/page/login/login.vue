@@ -21,6 +21,7 @@
                 <el-button class="login-button" @click="login('loginForm')" :loading="loading">登录</el-button>
             </el-form>
         </div>
+        <div @click="$router.push({path:'/imgPreloader'})">go imgUploader</div>
     </div>
 </template>
 <script>

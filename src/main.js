@@ -10,6 +10,23 @@ import './assets/iconFont/iconfont.css'
 import tagCloud from 'v-tag-cloud'
 Vue.use(tagCloud)
 
+import allImgPreloader from '@/imgPreloader/imagePreloader.js'
+
+
+let imgs = [
+  'http://119.45.53.85/img/1.jpg',
+  'http://119.45.53.85/img/2.jpg'
+]
+console.log('开始渲染---渲染中。。。')
+const res = allImgPreloader(imgs)
+res.then(val=>{
+  console.log('渲染成功')
+  console.log(23, val)//['图片加载成功', '图片加载成功']
+})
+
+
+
+
 /**
  *mock
  */

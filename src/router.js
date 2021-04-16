@@ -23,6 +23,8 @@ const refresh = ()=> import('@/page/special/refresh.vue')
 //step
 const step = ()=> import('@/page/step/stepMain.vue')
 
+const imgPreloader = ()=> import('@/page/imgPreloader/imgPreloader.vue')
+
 
 export default new Router({
   routes: [
@@ -141,6 +143,11 @@ export default new Router({
       path: '/step',
       name: 'step',
       component: step,
-    }
+    },
+    {
+      path: '/imgPreloader',
+      name: 'imgPreloader',
+      component: imgPreloader,
+    },
   ]
 })
