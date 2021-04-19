@@ -47,6 +47,10 @@ import '@/assets/js/plugins'
 
 Vue.config.productionTip = false
 
+//drag
+
+
+
 new Vue({
   router,
   store,

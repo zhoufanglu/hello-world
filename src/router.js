@@ -25,6 +25,8 @@ const step = ()=> import('@/page/step/stepMain.vue')
 
 const imgPreloader = ()=> import('@/page/imgPreloader/imgPreloader.vue')
 
+const drag = ()=> import('@/page/drag/drag.vue')
+
 
 export default new Router({
   routes: [
@@ -148,6 +150,11 @@ export default new Router({
       path: '/imgPreloader',
       name: 'imgPreloader',
       component: imgPreloader,
+    },
+    {
+      path: '/drag',
+      name: 'drag',
+      component: drag,
     },
   ]
 })
