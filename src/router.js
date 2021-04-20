@@ -26,6 +26,8 @@ const step = ()=> import('@/page/step/stepMain.vue')
 const imgPreloader = ()=> import('@/page/imgPreloader/imgPreloader.vue')
 
 const drag = ()=> import('@/page/drag/drag.vue')
+const drag2 = ()=> import('@/page/drag/drag2.vue')
+const drag3 = ()=> import('@/page/drag/drag3.vue')
 
 
 export default new Router({
@@ -155,6 +157,16 @@ export default new Router({
       path: '/drag',
       name: 'drag',
       component: drag,
+    },
+    {
+      path: '/drag2',
+      name: 'drag2',
+      component: drag2,
+    },
+    {
+      path: '/drag3',
+      name: 'drag2',
+      component: drag3,
     },
   ]
 })

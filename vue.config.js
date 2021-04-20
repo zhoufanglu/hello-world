@@ -105,7 +105,7 @@ module.exports = {
     // 是否使用css分离插件 ExtractTextPlugin
     extract: true,
     // 开启 CSS source maps?
-    sourceMap: false,
+    sourceMap: true,
     // css预设器配置项
     loaderOptions: {
       sass: {

@@ -34,6 +34,7 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "v-tag-cloud": "^1.0.3",
     "vue-content-loader": "^0.2.2",
+    "vue-grid-layout": "^2.3.12",
     "vue-skeleton-webpack-plugin": "^1.2.2",
     "vue-template-compiler": "^2.5.21",
     "vuedraggable": "^2.24.1",
