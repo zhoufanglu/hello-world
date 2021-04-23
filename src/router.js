@@ -28,6 +28,10 @@ const imgPreloader = ()=> import('@/page/imgPreloader/imgPreloader.vue')
 const drag = ()=> import('@/page/drag/drag.vue')
 const drag2 = ()=> import('@/page/drag/drag2.vue')
 const drag3 = ()=> import('@/page/drag/drag3.vue')
+const drag4 = ()=> import('@/page/drag/drag4.vue')
+
+const chart = ()=> import('@/page/charts/chart.vue')
+
 
 
 export default new Router({
@@ -165,8 +169,18 @@ export default new Router({
     },
     {
       path: '/drag3',
-      name: 'drag2',
+      name: 'drag3',
       component: drag3,
+    },
+    {
+      path: '/drag4',
+      name: 'drag4',
+      component: drag4,
+    },
+    {
+      path: '/chart',
+      name: 'chart',
+      component: chart,
     },
   ]
 })

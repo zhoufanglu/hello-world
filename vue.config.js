@@ -24,14 +24,17 @@ module.exports = {
   outputDir: 'dist',
   // eslint-loader 是否在保存的时候检查
   lintOnSave: false,
-  productionSourceMap: false, //关闭SourceMap 不查看代码
+  productionSourceMap: true, //关闭SourceMap 不查看代码
   // webpack配置
   configureWebpack: (config) => {
+
+    devtool: 'source-map',
+
     config.plugins.push(new SkeletonWebpackPlugin({
       webpackConfig: {
         entry: {
           app: path.join(__dirname, './src/skeleton/entry-skeleton.js'),
-        }
+        },
       },
       minimize: true,
       quiet: true,
@@ -177,5 +180,5 @@ module.exports = {
         bypassOnDebug: true
       })
       .end();
-  },
+  }
 };

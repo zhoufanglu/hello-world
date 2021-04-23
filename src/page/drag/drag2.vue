@@ -94,8 +94,8 @@ export default {
       this.layout.push({
         x: (this.layout.length * 2) % (this.colNum || 2),
         y: this.layout.length + (this.colNum || 2), // puts it at the bottom
-        w: 1,
-        h: 2,
+        w: this.index%2?2:1,
+        h: 1,
         i: this.index,
       })
       // Increment the counter to ensure key is always unique.
@@ -106,12 +106,16 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .p-drag2 {
-  .vue-grid-item{
-    border: solid 1px red;
-    color: green;
+  .vue-grid-item:not(.vue-grid-placeholder) {
+    background: #ccc;
+    border: 1px solid black;
   }
   touch-action: none;
+  .vue-grid-layout{
+    height: 500px;
+    border: solid 1px red;
+  }
 }
 </style>

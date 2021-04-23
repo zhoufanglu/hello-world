@@ -13,7 +13,7 @@
     <input type="checkbox" v-model="resizable" /> Resizable
     <grid-layout :layout.sync="layout"
                  :col-num="colNum"
-                 :row-height="30"
+                 :row-height="100"
                  :is-draggable="draggable"
                  :is-resizable="resizable"
                  :vertical-compact="true"
@@ -44,15 +44,15 @@ export default {
   data() {
     return {
       layout: [
-        { x: 0, y: 0, w: 2, h: 2, i: "0" },
+       /* { x: 0, y: 0, w: 2, h: 2, i: "0" },
         { x: 2, y: 0, w: 2, h: 2, i: "1" },
         { x: 4, y: 0, w: 2, h: 2, i: "2" },
         { x: 6, y: 0, w: 2, h: 2, i: "3" },
-        { x: 8, y: 0, w: 2, h: 2, i: "4" },
+        { x: 8, y: 0, w: 2, h: 2, i: "4" },*/
       ],
       draggable: true,
       resizable: true,
-      colNum: 12,
+      colNum: 2,
       index: 0,
     }
   },
@@ -62,19 +62,20 @@ export default {
   },
   methods: {
     addItem: function () {
-      console.log('x', (this.layout.length * 2) % (this.colNum || 12))
-      console.log('y', this.layout.length + (this.colNum || 12))
+      //console.log('x', (this.layout.length * 2) % (this.colNum || 12))
+      //console.log('y', this.layout.length + (this.colNum || 12))
       // Add a new item. It must have a unique key!
+      console.log(68, this.index)
       this.layout.push({
-        x: (this.layout.length * 2) % (this.colNum || 12),
-        y: this.layout.length + (this.colNum || 12), // puts it at the bottom
-        w: 2,
-        h: 2,
+        x: (this.layout.length * 2) % (this.colNum || 2),
+        y: this.layout.length + (this.colNum || 2), // puts it at the bottom
+        w: this.index%2?2:1,
+        h: 1,
         i: this.index,
       });
       // Increment the counter to ensure key is always unique.
-      this.index++;
-      console.log(77, this.layout)
+      this.index++
+      //console.log(77, this.layout)
     },
     removeItem: function (val) {
       const index = this.layout.map(item => item.i).indexOf(val);

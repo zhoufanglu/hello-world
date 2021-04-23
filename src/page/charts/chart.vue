@@ -3,7 +3,6 @@
   <div class="p-turnover-trend">
     <div class="p-trend-chart"
          ref="trendChart"
-         v-loading="!isFinished"
     ></div>
   </div>
 </template>
@@ -234,7 +233,8 @@ export default {
 .p-turnover-trend {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  width: 500px;
+  height: 500px;
   .p-trend-chart{
     height: calc(100% - 21px);
     border: solid 1px red;
