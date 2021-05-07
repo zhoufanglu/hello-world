@@ -1,47 +1,44 @@
 <template>
   <div class="p-drag">
 
-    <draggable v-model="rowList"
-               class="row-panel"
-               @start="drag=true"
-               @end="drag=false"
-    >
-      <transition-group
-          type="transition"
-          name="flip-list"
-          class="row-panel"
-      >
+    <div class="col-3">
+      <h3>Draggable 1</h3>
+      <draggable class="list-group" :list="list1" group="people">
         <div
-            class="row-item"
-            v-for="row in rowList"
-            :key="row.id">
-          <!--second-->
-          <draggable v-model="colList"
-                     v-if="row.id===0"
-                     group="people"
-                     @start="drag=true"
-                     @end="drag=false"
-          >
-            <transition-group
-                type="transition"
-                name="flip-list"
-                class="col-panel"
-            >
-              <div
-                  class="color-item"
-                  v-for="element in colList"
-                  :key="element.id">{{element.name}}
-              </div>
-            </transition-group>
-          </draggable>
-
-          <div v-if="row.id===1">
-            row-2
-          </div>
-
+            class="list-group-item"
+            v-for="(element, index) in list1"
+            :key="element.name"
+        >
+          {{ element.name }} {{ index }}
         </div>
-      </transition-group>
-    </draggable>
+      </draggable>
+    </div>
+
+    <div class="col-3">
+      <h3>Draggable 2</h3>
+      <draggable class="list-group" :list="list2" group="people">
+        <div
+            class="list-group-item"
+            v-for="(element, index) in list2"
+            :key="element.name"
+        >
+          {{ element.name }} {{ index }}
+        </div>
+      </draggable>
+    </div>
+
+    <div v-for="(father,index) in fartherList">
+      {{father.name}}
+      <draggable class="list-group" :list="father.list" group="father" @change="log">
+        <div
+            class="list-group-item"
+            v-for="(element, index) in father.list"
+            :key="element.name"
+        >
+          {{ element.name }} {{ index }}
+        </div>
+      </draggable>
+    </div>
 
   </div>
 </template>
@@ -53,51 +50,78 @@ export default {
   components: {draggable},
   data() {
     return {
-      rowList: [
-        {name: 'row-0', id: 0 , group: "row"},
-        {name: 'row-1', id: 1 , group: "row"}
+      list1: [
+        { name: "John", id: 1 },
+        { name: "Joao", id: 2 },
+        { name: "Jean", id: 3 },
+        { name: "Gerard", id: 4 }
       ],
-      colList: [
-        { name: "col-0", id: 0 , group: "col"},
-        { name: "col-1", id: 1 , group: "col"},
+      list2: [
+        { name: "Juan", id: 5 },
+        { name: "Edgard", id: 6 },
+        { name: "Johnson", id: 7 }
       ],
+      fartherList: []
     }
   },
   created() {
   },
   mounted() {
+    this.fartherList = [/*
+      {
+        name: 'father_1',
+        list: [
+          { name: "John", id: 1 },
+          { name: "Joao", id: 2 },
+          { name: "Jean", id: 3 },
+          { name: "Gerard", id: 4 }
+        ]
+      },
+      {
+        name: 'father_2',
+        list: [
+          { name: "Juan", id: 5 },
+          { name: "Edgard", id: 6 },
+          { name: "Johnson", id: 7 }
+        ]
+      },
+      {
+        name: 'father_3',
+        list: [
+          { name: "8", id: 8 },
+          { name: "9", id: 9 },
+          { name: "10", id: 10 }
+        ]
+      },
+    */]
+    this.fartherList = [{name: 'father_1'},{ name: 'father_2'},{ name: 'fahter_3'}]
+    let id = 0
+    let tempArr = JSON.parse(JSON.stringify(this.fartherList))
+    tempArr.forEach(i=>{
+      i.list = [
+        {name: i.name+id, id: id++},
+        {name: i.name+id, id: id++},
+      ]
+    })
+    this.fartherList = JSON.parse(JSON.stringify(tempArr))
   },
-  methods: {}
+  methods: {
+    log() {
+      console.log(92, this.fartherList)
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
 .p-drag {
-
-  .flip-list-move {
-    transition: transform 0.5s;
+  height: 500px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  >div{
+    border: solid 1px red;
+    width: 200px;
   }
-  .no-move {
-    transition: transform 0s;
-  }
-
-  .col-panel{
-    display: flex;
-    .color-item{
-      width: 100px;
-      height: 100px;
-      border: solid 1px red;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-
-  .row-panel{
-    .row-item{
-      height: 200px;
-      border: solid 1px red;
-    }
-  }
-
 }
 </style>

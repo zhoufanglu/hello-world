@@ -7,6 +7,9 @@ import store from './store'
 
 import './assets/iconFont/iconfont.css'
 
+import './assets/scss/test_A.scss'
+//import './assets/scss/test_B.scss'
+
 import tagCloud from 'v-tag-cloud'
 Vue.use(tagCloud)
 

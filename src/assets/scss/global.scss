@@ -1,1 +1,18 @@
 $testGreen: green;
+
+$themeConfig: (
+  type_1: "default", //默认
+  type_2: "company_A", //公司A
+  type_3: "company_B", //公司B
+);
+
+$theme-type : map-get($themeConfig, type_1);
+$theme: yello;
+
+@if $theme-type == "default" {
+  $theme: red;
+}
+
+@if $theme-type == "company_A" {  //公司A颜色
+  $theme: blue;
+}
