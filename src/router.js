@@ -32,6 +32,8 @@ const drag4 = ()=> import('@/page/drag/drag4.vue')
 
 const chart = ()=> import('@/page/charts/chart.vue')
 
+const canvasTest = ()=> import('@/page/canvas/canvasTest.vue')
+
 
 
 export default new Router({
@@ -181,6 +183,11 @@ export default new Router({
       path: '/chart',
       name: 'chart',
       component: chart,
+    },
+    {
+      path: '/canvasTest',
+      name: 'canvas',
+      component: canvasTest,
     },
   ]
 })

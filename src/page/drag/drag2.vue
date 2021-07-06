@@ -29,6 +29,7 @@
                  class="drag-item"
       >
         <span class="text">{{itemTitle(item)}}</span>
+        <button @click="removeItem(item.i)">删除</button>
       </grid-item>
     </grid-layout>
   </div>
@@ -102,6 +103,11 @@ export default {
       this.index++
       console.log(93, this.layout)
 
+    },
+    removeItem(id) {
+      console.log(108, id)
+      const index = this.layout.map(item => item.i).indexOf(id)
+      this.layout.splice(index, 1)
     }
   }
 }
