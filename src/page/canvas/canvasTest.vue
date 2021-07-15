@@ -6,6 +6,7 @@
       @onmouseup="onmouseup"
     >
     </canvas>
+    <button @click="freeFile('../../assets/img/canvasTest.png')">readFile</button>
   </div>
 </template>
 <script>
@@ -64,8 +65,24 @@ export default {
       this.ctx.strokeStyle = 'black'
       this.ctx.fill()
       this.ctx.stroke()
+    },
+    /**
+     * @description [viewFile 查看文件]
+     * @author  chenlong
+     * @param {String} url [文件地址]
+     * @returns {Null} [没有返回]
+     */
+    freeFile(url) {
+      let onlineViewType = ['doc', 'docx', 'xls', 'xlsx', 'xlsm', 'ppt', 'pptx']
+      let fileTypeName = url.substring(url.lastIndexOf('.') + 1, url.length).split('?')[0]
+      let isWord = onlineViewType.find((type) => type === fileTypeName)
+      if (isWord) {
+        url = 'http://view.officeapps.live.com/op/view.aspx?src=' + url
+      }
+      window.open(url, '_blank')
     }
-  }
+
+}
 }
 </script>
 <style lang="scss" scoped>

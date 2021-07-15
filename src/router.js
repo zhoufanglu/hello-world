@@ -33,6 +33,7 @@ const drag4 = ()=> import('@/page/drag/drag4.vue')
 const chart = ()=> import('@/page/charts/chart.vue')
 
 const canvasTest = ()=> import('@/page/canvas/canvasTest.vue')
+const lazyComponent = ()=> import('@/page/lazyComponent/lazyComponent.vue')
 
 
 
@@ -188,6 +189,11 @@ export default new Router({
       path: '/canvasTest',
       name: 'canvas',
       component: canvasTest,
+    },
+    {
+      path: '/lazyComponent',
+      name: 'lazyComponent',
+      component: lazyComponent,
     },
   ]
 })
