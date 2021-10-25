@@ -1,12 +1,11 @@
 <template>
   <div class="p-canvas-test">
-    <img src="../../assets/img/canvasTest.png" width="100" height="100">
     <canvas ref="cv"
       @mousedown="onmousedown"
       @onmouseup="onmouseup"
     >
     </canvas>
-    <button @click="freeFile('../../assets/img/canvasTest.png')">readFile</button>
+<!--    <button @click="freeFile('../../assets/img/canvasTest.png')">readFile</button>-->
   </div>
 </template>
 <script>
@@ -34,6 +33,7 @@ export default {
       //获取ctx
       let ctx = this.$refs.cv.getContext('2d')
       this.ctx = ctx
+
       //获取图片
       let img = new Image()
       img.src= require('../../assets/img/canvasTest.png')
@@ -41,7 +41,10 @@ export default {
         this.$refs.cv.width = img.width
         this.$refs.cv.height = img.height
         ctx.drawImage(img, 0,0,img.width,img.height)
+
+        ctx.strokeRect(50, 20, 120, 100);
       }
+
     },
     onmousedown(e) {
       this.startX = e.offsetX
